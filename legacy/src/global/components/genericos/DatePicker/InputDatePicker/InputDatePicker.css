@@ -1,0 +1,64 @@
+.ptur-InputDate-container {
+    position: relative;
+    background: var(--color-datePicker-grey95);
+    color:  var(--color-datePicker-grey45);
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--color-datePicker-grey90);
+    box-sizing: border-box;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    height: 35px;
+}
+
+.ptur-InputDate-container-svg {
+    width: 18px;
+    height: 18px;
+}
+
+.ptur-InputDate-container-selected {
+    position: relative;
+    background: #F7F7F7;
+    color: var(--color-datePicker-latex30);
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    height: 35px;
+}
+
+/*  */
+.ptur-InputDate-headerText{
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding-bottom: 5px;
+}
+
+.cursorDisable {
+    cursor: default;
+}
+
+.ptur-InputDate-inputBox{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.ptur-InputDate-borderError {
+    border: 1px solid var(--color-datePicker-danger) !important;
+  }
+  .ptur-InputDate-borderError:focus {
+    border: 1px solid var(--color-datePicker-danger) !important;
+  }

@@ -1,0 +1,57 @@
+- Establecer Funciones de los Roles: SUPERADMIN (sin restricciones), ADMIN (a definir), COORDINADOR, MEDICO, CONTROLCALIDAD
+
+- Que funciones necesitamos para que la pagina del dashboard este completa. (sugrencias, modificaciones) (ok)
+
+- Que estados vamos a trabajar y que respuesta deberiamos dar en funcion de seleccionar una hc segun su estado. Actuales: en curso, pendiente. Completado/Cerrado, Validado, Parcial.
+
+- Sidebar: que items necesitamos / dependerian de los roles. (ok para mvp)
+
+- Evolucion: Manejo con un drop de versiones y luego una impresion final donde se marque la incidencia tachada de lo que se fue modificando. OK
+
+- Definir MVP. OK 
+
+
+
+
+
+- Definir logo cemdim/dim (pendiente)
+- Pacientes (page) (pendiente)
+- Definir quien (QUE ROL) puede hacer edicion sobre versionado. Siempre seria sobre un completado o un validado.
+
+- FRONTEND: => TITULO "HC - CEDIM"
+
+ -- => lenguaje => español en todo el entorno.
+--> dashboard => protocolo (tipo - no id bd)
+            => pendientes primero en filtro.
+            => 
+
+
+ ==> backend .> fallback en español. sin abreviaturas.
+==> logica "en curso". ok.
+ ==> "Validado" => rol VALIDACIONES => Agregar.
+ ==> "Completado Parcial" => Revisaria una lista de items a realizar segun la visita.
+                                Si no cumple con alguno de los items, se revisa lo completado por el medico.
+                                Y se accede al estado parcial.
+
+Medico => acceso directo a evolucion por rol.
+        => Protocolo
+
+
+Coordinador => completa evoluciones, ve dashboard, ventana de edicion 48hs (completado-completadoparcial)
+
+
+
+
+
+
+-- Pages => Protocolo => PDF indicador Protocolo 
+
+
+
+
+FEATURES (fuera mvp)
+
+=> modulos de herramientas para campos con formula.
+
+
+

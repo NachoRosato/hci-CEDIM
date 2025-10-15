@@ -1,0 +1,13 @@
+[
+  { "id": "1", "protocolo": "P-1001", "paciente": "Juan Pérez", "medico": "Dr. Gómez", "usuario": "agomez", "hora": "08:30", "dia": "2025-10-05", "estado": "Pendiente" },
+  { "id": "2", "protocolo": "P-1002", "paciente": "María López", "medico": "Dra. Pérez", "usuario": "mperez", "hora": "09:10", "dia": "2025-10-05", "estado": "En curso" },
+  { "id": "3", "protocolo": "P-1003", "paciente": "Carlos Ruiz", "medico": "Dr. López", "usuario": "mlopez", "hora": "10:45", "dia": "2025-10-04", "estado": "Completado" },
+  { "id": "4", "protocolo": "P-1004", "paciente": "Ana Díaz", "medico": "Dra. Díaz", "usuario": "rdiaz", "hora": "11:20", "dia": "2025-10-03", "estado": "Pendiente" },
+  { "id": "5", "protocolo": "P-1005", "paciente": "Luis Romero", "medico": "Dr. Ruiz", "usuario": "lruiz", "hora": "12:05", "dia": "2025-10-02", "estado": "En curso" },
+  { "id": "6", "protocolo": "P-1006", "paciente": "Sofía Silva", "medico": "Dra. Silva", "usuario": "msilva", "hora": "13:15", "dia": "2025-10-02", "estado": "Completado" },
+  { "id": "7", "protocolo": "P-1007", "paciente": "Jorge García", "medico": "Dr. García", "usuario": "jgarcia", "hora": "14:40", "dia": "2025-10-01", "estado": "Pendiente" },
+  { "id": "8", "protocolo": "P-1008", "paciente": "Daniela Torres", "medico": "Dra. Torres", "usuario": "dtorres", "hora": "15:25", "dia": "2025-09-30", "estado": "Completado" },
+  { "id": "9", "protocolo": "P-1009", "paciente": "Karina Romero", "medico": "Dr. Romero", "usuario": "kromero", "hora": "16:00", "dia": "2025-09-29", "estado": "En curso" },
+  { "id": "10", "protocolo": "P-1010", "paciente": "Agustina Soto", "medico": "Dra. Soto", "usuario": "asoto", "hora": "17:45", "dia": "2025-09-28", "estado": "Pendiente" }
+]
+

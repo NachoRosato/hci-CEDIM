@@ -1,0 +1,52 @@
+.ptur-toaster {
+  position: absolute;
+  top: 37px;
+  height: max-content;
+  width: auto;
+  background: var(--color-toaster-danger);
+  border-radius: 16px;
+  z-index: 2000;
+}
+.ptur-toaster-content {
+  text-align: left;
+  color: var( --color-toaster-white);
+  padding: 20px 27px;
+  height: 84px;
+  display: flex;
+}
+
+.ptur-toaster-centrar {
+  left: 50%;
+  transform: translate(-50%, 0);
+  transition: transform 0.5s;
+}
+
+.ptur-toaster-desplazarCentroArriba {
+  animation-name: ptur-toaster-desplazarCentroArriba;
+}
+.ptur-toaster-texto {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 30px;
+}
+
+@media (max-width: 1024px) {
+  .ptur-toaster {
+    width: auto;
+    height: auto;
+  }
+  .ptur-toaster-texto {
+    width: 300px;
+    padding-right: 0px;
+  }
+}
+
+/* @keyframes ptur-toaster-desplazarCentroArriba {
+  from {
+    transform: translate(-10%, 100%);
+  }
+  to {
+    transform: translate(-80%, 100%);
+  }
+} */

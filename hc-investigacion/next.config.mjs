@@ -1,0 +1,20 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
+  experimental: {
+    typedRoutes: true,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/login',
+        permanent: false,
+      },
+    ];
+  },
+};
+
+export default nextConfig;

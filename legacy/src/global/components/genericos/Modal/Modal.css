@@ -1,0 +1,223 @@
+.fondo {
+  background-color: hsla(0, 0%, 0%, 0.5);
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  position: absolute;
+}
+
+.modalContent {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  background: white;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 10px;
+  text-align: center;
+  opacity: 1;
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198),
+    0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035),
+    0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+  /* animation-duration: 2s;    */
+  animation: desplazarCentrado 0.6s ease-in-out;
+}
+.centro {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: 1s all;
+}
+.centroAbajo {
+  left: 50%;
+  bottom: 80px;
+  transform: translate(-50%, 0);
+}
+
+.centroDerecha{
+  left: 61%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modalHeader {
+  padding: 16px;
+  border-radius: 8px 8px 0px 0px;
+  min-width: 350px
+  
+}
+/* .modalTitle {
+  margin: 0px;
+} */
+.modalBody {
+  padding-top: 30px;
+}
+
+.btn {
+  padding: 12px 36px;
+  min-width: 100px;
+  border-radius: 8px;
+  margin: 8px;
+  background: white;
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198),
+    0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035),
+    0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+}
+
+.btn-Mensaje-1 {
+  padding: 12px 56px;
+  min-width: 100px;
+  border-radius: 8px;
+  margin: 8px;
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198),
+    0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035),
+    0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+}
+.btn-Mensaje {
+  padding: 9px 56px;
+  min-width: 100px;
+  border-radius: 8px;
+  margin: 8px;
+  background-color: var(--color-white);
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198),
+    0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035),
+    0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+}
+
+.cruz {
+  right: 32px;
+  top: 16px;
+  position: absolute;
+  display: block;
+  height: 16px;
+  width: 16px;
+}
+.cruz:hover {
+  cursor: pointer;
+}
+.cruzParte1 {
+  border: 1px solid #fff;
+  height: 20px;
+  transform: rotate(45deg);
+  width: 0px;
+  background: #fff;
+  position: absolute;
+  left: 8px;
+}
+.cruzParte2 {
+  border: 1px solid #fff;
+  height: 20px;
+  transform: rotate(-45deg);
+  width: 0px;
+  background: #fff;
+  position: absolute;
+  left: 8px;
+}
+h3 {
+  margin: 8px;
+}
+.hide {
+  visibility: hidden;
+}
+.show {
+  visibility: show;
+}
+.footerModal {
+  display: flex;
+  border: 1px;
+  height: 56px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+@media (max-width: 1700px) {
+  .modalContent {   
+    min-width: 350px; 
+  }
+  .centroDerecha{
+    left: 65%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }  
+}
+@media (max-width: 1400px) {
+  .modalContent {   
+    min-width: 350px; 
+  }
+  .centroDerecha{
+    left: 70%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }  
+}
+@media (max-width: 1024px) {
+  .modalContent {    
+    min-width: 350px;
+  }
+  .btn-Mensaje {    
+    padding: 12px 7px;
+  }
+  .btn-Mensaje-1 {    
+    padding: 0px 10px;
+  }
+  .centroDerecha{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }  
+}
+
+@media (max-width: 600px) {
+  .modalContent {   
+    min-width: 350px; 
+    
+  }
+  .centroDerecha{
+    left: 50%;
+    top: 51%;
+    transform: translate(-50%, -50%);
+  }  
+}
+.desplazarCentro {
+  animation-name: desplazarCentrado;
+  /* animation-delay: 0.0000000001s; */
+  /* animation-delay: 1s; */
+}
+
+@keyframes desplazarCentrado {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* .desplazarCentroDerecha {
+  animation-name: desplazarCentrado;
+}
+@keyframes desplazarCentrado {
+  from {
+    transform: translate(-50%, 100%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+} */
+
+.desplazarCentroAbajo {
+  animation-name: desplazarCentroAbajo;
+}
+
+@keyframes desplazarCentroAbajo {
+  from {
+    transform: translate(-50%, 100%);
+  }
+  to {
+    transform: translate(-50%, 0%);
+  }
+}

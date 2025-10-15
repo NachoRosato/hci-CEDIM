@@ -1,0 +1,17 @@
+const CartillaIcon = ({ color }) => {
+    return (
+        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.5" y="0.843872" width="13" height="14" rx="0.5" stroke={color}/>
+        <line x1="1" y1="4.84387" x2="14" y2="4.84387" stroke={color}/>
+        <line x1="1" y1="6.84387" x2="14" y2="6.84387" stroke={color}/>
+        <line x1="1" y1="8.84387" x2="14" y2="8.84387" stroke={color}/>
+        <line x1="1" y1="10.8439" x2="14" y2="10.8439" stroke={color}/>
+        <line x1="1" y1="10.8439" x2="14" y2="10.8439" stroke={color}/>
+        <line x1="1" y1="12.8439" x2="14" y2="12.8439" stroke={color}/>
+        <line x1="7.25" y1="4.34387" x2="7.25" y2="15.3439" stroke={color} strokeWidth="0.5"/>
+        </svg>
+        
+    );
+  };
+  
+  export default CartillaIcon;

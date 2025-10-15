@@ -1,0 +1,136 @@
+.ptur-dropdown-containerBoxBO {
+  position: relative;
+}
+
+.ptur-dropdown-inputSimulado {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--color-datePicker-grey90);
+  padding: 8px;
+  padding-right: 50px;
+  text-align: left;
+  color: var(--color-latex30);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ptur-dropdown-onlyList {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--color-datePicker-grey90);
+  padding: 8px;
+  padding-right: 50px;
+  text-align: left;
+  color: var(--color-datePicker-grey45);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ptur-dropdown-inputSimulado::placeholder {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.ptur-dropdown-cointainer-lista {
+  background-color: var(--color-dropdown-grey97);
+  height: 144px;
+  border-radius: 4px;
+  border: 1px solid var(--color-dropdown-latex30);
+  color: var(--color-dropdown-latex30);
+  overflow-y: scroll;
+  position: absolute;
+  width: 98.5%;
+  z-index: 12;
+}
+.ptur-dropdown-lista {
+  list-style: none;
+  height: auto;
+  text-align: left;
+  padding-left: 14px;
+  padding-top: 2px;
+}
+
+.ptur-dropdown-lista-hover {
+  list-style: none;
+  height: auto;
+  text-align: left;
+  padding-left: 14px;
+  padding-top: 2px;
+  background: var(--color-dropdown-latex30);
+  color: var(--color-dropdown-white);
+}
+
+.ptur-dropdown-lista:hover {
+  background: var(--color-dropdown-latex30);
+  color: var(--color-dropdown-white);
+}
+
+.fondoDropdown {
+  height: 2000px;
+  width: 3000px;
+  z-index: 11;
+  position: absolute;
+  top: -1500px;
+  left: -1000px;
+}
+
+.ptur-dropdown-flecha-hide {
+  position: absolute;
+  padding-top: 6px;
+  right: 28px;
+}
+
+.ptur-dropdown-flecha-show {
+  position: absolute;
+  margin-top: 10px;
+  right: 28px;
+  transform: rotate(180deg);
+}
+
+.ptur-dropdown-itemsOverflow {
+  /* text-overflow: ellipsis;
+  white-space: nowrap; */
+  overflow: hidden;
+}
+
+.ptur-dropdown-itemsOverflow:hover {
+  z-index: 4000;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-dropdown-grey77);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dropdown-black35);
+}
+
+.ajustarFondoEvo {
+  position: fixed;
+  top: -1000px;
+}
+
+@media (max-width: 1280px) {
+  .ptur-dropdown-mobileWidth {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .ptur-datepicker-headerMobile {
+    width: 150px;
+  }
+}

@@ -1,0 +1,234 @@
+ //-- logica abrir orden
+  // const seleccionarTipoOrden = () => {
+  //   // showSegundoModal(
+  //   //   <SolicitarEstudios
+  //   //     dissmiss={dissmissOrden}
+  //   //     abrirOrdenLabo={abrirOrdenLabo}
+  //   //     abrirOrdenPractica={abrirOrdenPractica}
+  //   //   />,
+  //   //   "Solicitud de orden",
+  //   //   dissmissSegundo,
+  //   //   false,
+  //   //   {},
+  //   //   "centro",
+  //   //   true
+  //   // )(segundoModalDispatch);
+  // };
+  //--- fin logica abrir ordenes
+  //-- logica orden Practica
+  // const abrirOrdenPractica = (item, modifica, index) => {
+  //   dissmissSegundo();
+  //   if (
+  //     (ordenPracticaState.ordenPractica.practicasXEsp !== null ||
+  //       ordenPracticaState.ordenPractica.practicasXUser !== null) &&
+  //     ordenPracticaState.ordenPractica.estudioGrupo !== null
+  //   ) {
+  //     showModal(
+  //       <CrearOrdenPrac
+  //         dissmiss={dissmissOrden}
+  //         showModalOrdenPaso2={showModalOrdenPaso2}
+  //         datosBuscador={ordenPracticaState.ordenPractica.estudioGrupo.items}
+  //         datosPaso2Prac={datosPaso2Prac}
+  //         setDatosPaso2Prac={setDatosPaso2Prac}
+  //         edicion={modifica === "edita" ? true : false}
+  //         itemEditar={item}
+  //       />,
+  //       "Orden de Estudio Médico",
+  //       dissmissOrden,
+  //       false,
+  //       {},
+  //       "centro",
+  //       true
+  //     )(modalDispatch);
+  //   } else {
+  //     showToaster(
+  //       {
+  //         texto: "No posee los datos necesarios para continuar",
+  //         tipo: "danger",
+  //       },
+  //       "centroArriba"
+  //     )(toasterDispatch);
+  //   }
+  // };
+  // const showModalOrdenPaso2 = () => {
+  //   hideModal()(modalDispatch);
+  //   showModal(
+  //     <CrearOrdenPracPaso2
+  //       dissmiss={dissmissOrden}
+  //       datosBuscador={[]}
+  //       agregadosEnConsulta={datosPaso2Prac}
+  //       setDatosPaso2Prac={setDatosPaso2Prac}
+  //       abrirOrdenPractica={abrirOrdenPractica}
+  //       ordenDigital={ordenDigital}
+  //       setOrdenDigital={setOrdenDigital}
+  //     />,
+  //     "Orden de Estudio Médico",
+  //     dissmissOrden,
+  //     false,
+  //     {},
+  //     "centro",
+  //     true
+  //   )(modalDispatch);
+  // };
+  // useEffect(() => {
+  //   if (datosPaso2Prac.fechaElegida !== "") {
+  //     showModalOrdenPaso2();
+  //   }
+  // }, [datosPaso2Prac]);
+
+
+
+  //logica labo a borrar
+
+  const crearOrdenLabo = (item, procesoModifica, ordenGeneradaIndex) => {
+    dissmissSegundo();
+    let auxOrdenDeters = laboratorioState.laboratorio.itemsOrdenHc.items;
+    let auxBuscadorItems = laboratorioState.laboratorio.labNomenclador.items;
+    auxOrdenDeters = auxOrdenDeters.map((obj) => ({ ...obj, checked: false }));
+    //tuve que agregar idlabnomenclador para filtrar bien del otro lado
+    auxBuscadorItems = auxBuscadorItems.map((obj) => ({
+      ...obj,
+      checked: false,
+      idlabnomenclador_desc: obj.descripcion,
+      idlabnomenclador: obj.codigo,
+    }));
+
+    //circuito de modificacion de orden
+    let sobrante = [];
+    if (procesoModifica) {
+      //determino las coincidencias y modifico sobre el mismo
+      auxOrdenDeters = auxOrdenDeters.map((obj) => {
+        for (let i = 0; i < item.items.length; i++) {
+          if (
+            obj.idlabnomenclador_desc === item.items[i].idlabnomenclador_desc
+          ) {
+            obj.checked = true;
+          }
+        }
+        return obj;
+      });
+      // determino si hubo sobrante
+
+      item.items.filter((obj) => {
+        if (
+          auxOrdenDeters.find(
+            (element) =>
+              element.idlabnomenclador_desc === obj.idlabnomenclador_desc
+          ) === undefined
+        ) {
+          sobrante.push(obj);
+        }
+      });
+    }
+    //-- fin circuito modificacion
+
+    showModal(
+      <CrearOrdenLabo
+        dissmiss={dissmissModifTracked}
+        dissmissSave={dissmissModif}
+        deters={auxOrdenDeters}
+        buscadorItems={auxBuscadorItems}
+        setNuevaOrdenGenerada={setNuevaOrdenGenerada}
+        detersAuxiliares={sobrante}
+        itemsEnEdicion={procesoModifica ? item.items : []}
+        ordenSeleccionada={procesoModifica ? item : []}
+        ordenGeneradaIndex={ordenGeneradaIndex}
+        seleccionaOrden={selecOrdenLabo}
+      />,
+      "Orden de Laboratorio",
+      dissmissModifTracked,
+      false,
+      {},
+      "centro",
+      true
+    )(modalDispatch);
+  };
+
+  const dissmissModifTracked = (arrayItems) => {
+    hideModal()(modalDispatch);
+    selecOrdenLabo(arrayItems);
+  };
+
+  const dissmissModif = () => {
+    hideModal()(modalDispatch);
+  };
+
+  //abre la edicion o la creacion de una orden
+  useEffect(() => {
+    if (nuevaOrdenGenerada !== null) {
+      selecOrdenLabo(
+        nuevaOrdenGenerada.dtoGeneraOrden,
+        nuevaOrdenGenerada.modifica,
+        nuevaOrdenGenerada.index
+      );
+      setNuevaOrdenGenerada(null);
+    }
+  }, [nuevaOrdenGenerada]);
+  //--- fin logica orden labo
+
+  const dissmissOrden = () => {
+    hideModal()(modalDispatch);
+  };
+
+  const dissmissSegundo = () => {
+    hideSegundoModal()(segundoModalDispatch);
+  };
+
+  const dissmissSegundoTracked = () => {
+    hideSegundoModal()(segundoModalDispatch);
+    abrirOrdenLabo();
+  };
+
+  const selecOrdenLabo = (item, modifica, index) => {
+    dissmissOrden();
+    showSegundoModal(
+      <ModificaOrdenLabo
+        itemSeleccionado={item}
+        dissmiss={dissmissSegundoTracked}
+        dissmissSave={dissmissSegundo}
+        datosPac={pacienteState.paciente?.buscarPac?.items[0]}
+        crearOrdenLabo={crearOrdenLabo}
+        setOrdenDigital={setOrdenDigital}
+        ordenDigital={ordenDigital}
+        ordenGeneradaIndex={index}
+        modifica={modifica}
+      />,
+      "Orden de Laboratorio",
+      dissmissSegundoTracked,
+      false,
+      {},
+      "centro",
+      true
+    )(segundoModalDispatch);
+  };
+
+  const abrirOrdenLabo = () => {
+    dissmissSegundo();
+    let auxOrdenUser = laboratorioState.laboratorio.grupoEstudiosUsuario.items;
+    //deberia usar las 15 mil deters o las 800?
+    let auxOrdenDeters = laboratorioState.laboratorio.grupoEstudios.items;
+    auxOrdenDeters = auxOrdenDeters.map((obj) => ({ ...obj, checked: false }));
+    let arrAux = null;
+    for (let i = 0; i < auxOrdenUser.length; i++) {
+      arrAux = auxOrdenDeters.filter(
+        (item) => item.idgrupoestudio === auxOrdenUser[i].id
+      );
+      arrAux = arrAux.map((obj) => ({ ...obj, checked: true }));
+      auxOrdenUser[i].items = arrAux;
+    }
+    showModal(
+      <OrdenLabo
+        dissmiss={dissmissOrden}
+        ordenItems={auxOrdenUser}
+        seleccionaOrden={selecOrdenLabo}
+        crearNuevaOrden={crearOrdenLabo}
+        mensajeVerMas={mensajeVerMas}
+      />,
+      "Orden de Laboratorio",
+      dissmissOrden,
+      false,
+      {},
+      "centro",
+      true
+    )(modalDispatch);
+  };

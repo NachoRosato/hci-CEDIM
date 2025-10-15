@@ -1,0 +1,51 @@
+# Node & package managers
+**/node_modules/
+**/.pnp
+**/.pnp.js
+
+# Environments (mantener solo .env.example)
+*.env
+*.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# Build outputs / caches
+**/.next/
+**/out/
+**/build/
+**/dist/
+**/.turbo/
+**/.cache/
+**/.vercel/
+
+# Test / coverage
+**/coverage/
+
+# Editor/OS
+**/.idea/
+**/.vscode/
+**/.DS_Store
+**/Thumbs.db
+
+# Cursor/agent tooling
+**/.cursor/
+**/.agent-tools/
+
+# Cypress artifacts (legacy)
+legacy/cypress/videos/
+legacy/cypress/screenshots/
+
+# Legacy build outputs
+legacy/build/
+
+# Misc
+**/*.local

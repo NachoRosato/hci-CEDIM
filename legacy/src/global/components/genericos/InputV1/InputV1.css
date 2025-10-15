@@ -1,0 +1,124 @@
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--color-inputV1-grey45);
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: var(--color-inputV1-grey45);
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: var(--color-inputV1-grey45);
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: var(--color-inputV1-grey45);
+}
+
+.inputV1 input {
+  border: 1px solid var(--color-inputV1-grey90);
+  background-color: var(--color-inputV1-grey95);
+  border-radius: 4px;
+  color: var(--color-inputV1-latex30);
+  height: 28px;
+  width: 28px;
+  padding: 4px;
+}
+
+.inputV1 input::placeholder {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+.inputV1 {
+  height: 74px;
+}
+.inputV1 input:focus {
+  border: 2px solid var(--color-inputV1-latex30);
+}
+.ptur-inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+.fecha {
+  border: 1px solid var(--color-inputV1-grey90);
+  background-color: var(--color-inputV1-grey95);
+  border-radius: 4px;
+  color: var(--color-inputV1-latex30);
+  padding: 8px;
+  height: 36px;
+}
+.fecha:focus {
+  border: 2px solid var(--color-inputV1-latex30);
+}
+.checkBox,
+.radio {
+  display: inline-block;
+  float: left;
+  height: 28px;
+  width: 28px;
+}
+
+.ptur-label-checkbox,
+.ptur-label-radio {
+  display: flex;
+  padding: 5px;
+}
+
+.ptur-input-borderError {
+  border: 1px solid var(--color-inputV1-danger) !important;
+}
+.ptur-input-borderError:focus {
+  border: 1px solid var(--color-inputV1-danger) !important;
+}
+
+.headerInput {
+  text-align: left;
+}
+
+.inputNumeric {
+  -webkit-text-security: disc;
+}
+.inputNumericShow {
+  -webkit-text-security: --color-inputV1-latex30;
+}
+
+.inputNonScroll::-webkit-outer-spin-button,
+.inputNonScroll::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputNonScroll {
+  -moz-appearance: textfield;
+}
+
+.ptur-ion-col {
+  height: 90px;
+}
+
+.ptur-widhtTest {
+  width: 200px;
+}
+
+.changeHeight {
+  height: 41px;
+}
+
+@media (max-width: 768px) {
+  .ptur-registro-scroll {
+    overflow-y: scroll;
+    height: 360px;
+  }
+
+  .ptur-label-radio {
+    margin-right: 16px;
+  }
+}
+
+@media (max-width: 370px) {
+  #ptur-login-password-linkStr {
+    font-size: 13px;
+  }
+}

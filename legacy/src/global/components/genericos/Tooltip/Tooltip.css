@@ -1,0 +1,61 @@
+.wrapper,.tooltip-data {
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+}
+.tooltip {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.tooltip-txt{
+  width: 100%;
+  color: aquamarine;
+}
+.wrapper .icon {
+  position: relative;
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon .tooltip {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background: var(--color-tooltip-white);
+  color: var(--color-tooltip-latex10);
+  padding: 10px 14px;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid var(--color-tooltip-grey65);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  left: -30px;
+}
+.wrapper .icon:hover .tooltip {
+  top: -166px;
+  left: -30px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/*Flecha tooltip*/
+.icon .tooltip:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  background: var(--color-tooltip-white);
+  border-top: 1px  solid var(--color-tooltip-grey65);
+  border-left: 1px  solid var(--color-tooltip-grey65);
+  left: 20%;
+  transform: translateX(-50%) rotate(225deg);
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+

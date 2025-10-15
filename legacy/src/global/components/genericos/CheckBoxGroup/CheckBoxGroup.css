@@ -1,0 +1,20 @@
+.ptur-checkBoxGroup-container {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.ptur-checkBoxGroup-container-column {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-left: 24px;
+    
+}
+
+.margin-10px {
+    margin-left: -24px;
+}

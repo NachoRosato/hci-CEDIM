@@ -1,0 +1,7 @@
+{
+  "name": "arquitectura-base",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

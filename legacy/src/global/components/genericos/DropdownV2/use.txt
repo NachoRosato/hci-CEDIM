@@ -1,0 +1,38 @@
+const config = {
+    data: data, 
+    header: "",
+    footer: "",
+    descripcion: "descripcion",
+    placeholder: "Ej: DIM Espora",
+    placeHolderFontSize: 14,
+    defaultValue: centroDerivadorSeleccionado,
+    defaultValueParametro: "id",
+    height: 32,
+    cantidadItems: 4,
+    maxlength: 10,
+    error: false,
+    arrow: true,
+    search: true,
+    disabled: false,
+    showUp: true,
+    regex: /^[a-zA-Z\s]+$/,
+};
+
+data: array a recorrer
+header: titulo de dropdown
+footer: subtitulo rojo en caso de error
+descripcion: lo que vamos a listar en el menu desplegable 
+placeholder: texto en modo buscador 
+placeHolderFontSize: tamaño letra placeholder 
+defaultValue: dato que se muestra al principio, se recorre el array de data
+defaultValueParametro: parametro para recorrer y encontrar el defaultValue
+height: alto dropdown 
+cantidadItems: cantidad de elementos que queramos mostrar en el menu desplegable 
+maxlength: cantidad de caracteres permitidos en modo buscador 
+error: si hay un error en el campo se pone rojo 
+arrow: activar flecha 
+search: activar modo buscador 
+disabled: deshabilitar componente 
+keyboardNavigation: activar la navegacion por teclado
+showUp: activo opcion de desplegar hacia arriba si se va de la pantalla
+regex: expresiones regulares

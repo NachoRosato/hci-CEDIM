@@ -1,0 +1,48 @@
+.ptur-tildeOk-box{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.ptur-tildeOk-circulito {
+  display: flex;
+  width: 24px;
+  height: 24px;
+
+  border: 2.5px solid #30c663;
+  border-radius: 25px;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5px;
+}
+
+.ptur-tildeOk-circulito img {
+  text-align: center;
+  margin: auto;
+  padding: 1px; 
+  width: 80%;
+  height: 80%;
+}
+.ptur-tildeOk-texto{
+  padding-left: 5px;
+  margin: 0px;
+}
+
+.ptur-tildeOk-perfil-beneficios img{
+  text-align: center;
+  margin: auto;
+  padding: 1px;
+  color: var(--color-black);
+  width: 80%;
+  height: 80%;
+}
+
+@media (max-width: 500px){
+  .ptur-tildeOk-box { 
+    display: grid;    
+    grid-template-columns: 0.08fr 1fr;
+  }
+}

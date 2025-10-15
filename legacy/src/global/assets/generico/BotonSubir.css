@@ -1,0 +1,21 @@
+.scrollTop {
+  width: 8%;
+  bottom: 20px;
+  align-items: center;
+  height: 20px;
+  justify-content: center;
+  cursor: pointer;
+  gap: 6px;
+  border-radius: 8px;
+}
+.scrollTop-container {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 1365px) {
+  .scrollTop {
+    width: 100%;
+    padding: 10px;
+  }
+  
+}

@@ -1,0 +1,13 @@
+{
+  "BACKEND_URL": "http://localhost:3001",
+  "features": {
+    "auth": true,
+    "auditoria": false,
+    "evolucion": false,
+    "laboratorio": true,
+    "search": true
+  },
+  "authOptional": true,
+  "mockUser": "J. Pérez"
+}
+

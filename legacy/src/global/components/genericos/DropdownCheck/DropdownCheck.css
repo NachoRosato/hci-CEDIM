@@ -1,0 +1,189 @@
+.ptur-dropdownCheck-container {
+  width: auto;
+  height: auto;
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-grey85);
+  box-sizing: border-box;
+  border-radius: 4px;
+  min-height: 39px;
+}
+
+.ptur-dropdownCheck-container:hover {
+  cursor: pointer;
+}
+
+.ptur-dropdownCheck-selectBox {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.ptur-dropdownCheck-selectBody {
+  width: auto;
+  height: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 8px;
+}
+
+.ptur-dropdownCheck-flecha-hide {
+  padding-left: 9px;
+  padding-bottom: 3px;
+}
+
+.ptur-dropdownCheck-flecha-show {
+  padding-bottom: 0px;
+  padding-right: 9px;
+  transform: rotate(180deg);
+}
+
+.ptur-dropdownCheck-overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.ptur-dropdownCheck-checkboxes {
+  width: 100%;
+  max-height: 650px;
+  overflow-y: scroll;
+  display: none;
+  position: absolute;
+  top: 37px;
+  padding-top: 19px;
+  padding-left: 16px;
+  padding-bottom: 0px!important;
+  border: 1px var(--color-latex30) solid;
+  background: var(--color-white);
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07),
+    0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198),
+    0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275),
+    0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035),
+    0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725),
+    0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  /* border-radius: 4px; */
+}
+
+.ptur-dropdownCheck-checkboxes-blocked {
+  display: block;
+  z-index: 4;
+  overflow-x: hidden;
+}
+
+.ptur-dropdownCheck-checkboxes-unBlocked {
+  display: none;
+}
+.ptur-dropdownCheck-checkboxes-arrow {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 93%;
+  background: var(--color-white);
+  right: 42%;
+  transform: rotate(314deg);
+}
+
+.ptur-dropdownCheck-checkboxes label {
+  display: flex;
+  position: relative;
+  padding-left: 33px;
+  padding-bottom: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.ptur-dropdownCheck-checkboxes label input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.ptur-dropdownCheck-checkbox-checkmark {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  background-color: var(--color-grey85);
+}
+
+/* On mouse-over, add a grey background color */
+.ptur-dropdownCheck-checkboxes
+  label:hover
+  input
+  ~ .ptur-dropdownCheck-checkbox-checkmark {
+  background-color: var(--color-grey85);
+}
+
+/* When the checkbox is checked, add a blue background */
+.ptur-dropdownCheck-checkboxes
+  label
+  input:checked
+  ~ .ptur-dropdownCheck-checkbox-checkmark {
+  background-color: var(--color-latex30);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.ptur-dropdownCheck-checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.ptur-dropdownCheck-checkboxes
+  label
+  input:checked
+  ~ .ptur-dropdownCheck-checkbox-checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.ptur-dropdownCheck-checkboxes
+  label
+  .ptur-dropdownCheck-checkbox-checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 3px;
+  height: 8px;
+  border: solid var(--color-white);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.ptur-dropdownCheck-selectBox-active {
+  border: 1px solid var(--color-latex30);
+}
+
+.ptur-dropdownCheck-fondo {
+  height: 3000px;
+  width: 3000px;
+  z-index: 3;
+  position: absolute;
+  top: -1500px;
+  left: -1000px;
+}
+
+@media (max-width: 1365px) {
+  .ptur-dropdownCheck-checkboxes {
+      max-height: 305px;
+  }
+}

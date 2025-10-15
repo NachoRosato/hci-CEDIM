@@ -1,0 +1,1 @@
+// aquí se exporta el primer estado inicial 
