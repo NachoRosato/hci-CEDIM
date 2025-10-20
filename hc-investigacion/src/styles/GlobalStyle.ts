@@ -14,6 +14,23 @@ const GlobalStyle = createGlobalStyle<{ mode?: 'blue' | 'silver' | 'default' }>`
     /* Gradients from legacy */
     --color-primary-gradient: linear-gradient(90deg, #001019 18.65%, #014e7a 86.55%);
     --color-latex30-gradient: linear-gradient(257.94deg, #027bc0 18.65%, #004b76 86.55%);
+
+    /* Formularios - Variables adicionales */
+    --color-latex95: hsla(202, 100%, 95%, 1);
+    --color-grey97: hsla(0, 0%, 97%, 1);
+    --color-grey95: hsla(0, 0%, 95%, 1);
+    --color-grey90: hsla(0, 0%, 90%, 1);
+    --color-grey85: hsla(0, 0%, 85%, 1);
+    --color-grey77: hsla(0, 0%, 77%, 1);
+    --color-grey65: hsla(0, 0%, 65%, 1);
+    --color-grey45: hsla(0, 0%, 45%, 1);
+    --color-black35: hsla(0, 0%, 35%, 1);
+    --color-black20: hsla(0, 0%, 20%, 1);
+    --color-black10: hsla(0, 0%, 10%, 1);
+    --color-black5: hsla(0, 0%, 5%, 1);
+    --color-black: hsla(0, 0%, 0%, 1);
+    --color-broccoli: hsla(128, 43%, 42%, 1);
+    --color-white: hsla(0, 0%, 100%, 1);
   }
 
   body {
