@@ -20,6 +20,7 @@ const FieldContainer = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 16px;
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -30,7 +31,7 @@ const Label = styled.label`
   
   &.required::after {
     content: ' *';
-    color: var(--color-danger);
+    color: var(--color-latex30);
   }
 `;
 
@@ -54,19 +55,26 @@ const Input = styled.input`
   }
   
   &.error {
-    border-color: var(--color-danger);
+    border-color: var(--color-latex30);
   }
+`;
+
+const TextAreaWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const TextArea = styled.textarea`
   padding: 12px 16px;
+  padding-top: 16px;
   border: 1px solid var(--color-grey90);
   border-radius: 8px;
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
   background-color: var(--color-white);
   resize: vertical;
-  min-height: 80px;
+  min-height: 120px;
+  width: 100%;
   
   &:focus {
     outline: none;
@@ -74,7 +82,37 @@ const TextArea = styled.textarea`
   }
   
   &.error {
-    border-color: var(--color-danger);
+    border-color: var(--color-latex30);
+  }
+`;
+
+const FloatingButton = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-latex30);
+  background-color: var(--color-white);
+  color: var(--color-latex30);
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  
+  &:hover {
+    background-color: var(--color-latex30);
+    color: var(--color-white);
+    transform: scale(1.1);
+  }
+  
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -93,7 +131,7 @@ const Select = styled.select`
   }
   
   &.error {
-    border-color: var(--color-danger);
+    border-color: var(--color-latex30);
   }
 `;
 
@@ -102,12 +140,26 @@ const CheckboxContainer = styled.div`
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  padding: 8px 0;
 `;
 
 const Checkbox = styled.input`
   width: 18px;
   height: 18px;
   accent-color: var(--color-latex30);
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const CheckboxLabel = styled.span`
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  color: var(--color-black35);
+  cursor: pointer;
+  user-select: none;
 `;
 
 const RadioGroup = styled.div`
@@ -134,7 +186,7 @@ const RadioInput = styled.input`
 const ErrorMessage = styled.span`
   font-family: 'Rubik', sans-serif;
   font-size: 12px;
-  color: var(--color-danger);
+  color: var(--color-latex30);
   margin-top: 4px;
 `;
 
@@ -146,7 +198,7 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
   disabled = false
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    let newValue = e.target.value;
+    let newValue: string | number | boolean = e.target.value;
     
     if (field.type === 'number') {
       newValue = e.target.value ? Number(e.target.value) : '';
@@ -154,7 +206,7 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
       newValue = (e.target as HTMLInputElement).checked;
     }
     
-    onChange(newValue);
+    onChange(newValue as string);
   };
 
   const renderInput = () => {
@@ -170,7 +222,22 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
 
     switch (field.type) {
       case 'textarea':
-        return <TextArea {...commonProps} />;
+        return (
+          <TextAreaWrapper>
+            <TextArea {...commonProps} />
+            <FloatingButton
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                // Aquí se puede agregar lógica para expandir o agregar funcionalidad
+                console.log('Botón + presionado en', field.id);
+              }}
+              title="Expandir"
+            >
+              +
+            </FloatingButton>
+          </TextAreaWrapper>
+        );
       
       case 'select':
         return (
@@ -194,7 +261,7 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
               onChange={handleChange}
               disabled={disabled}
             />
-            <span>{field.label}</span>
+            <CheckboxLabel>{field.label}</CheckboxLabel>
           </CheckboxContainer>
         );
       

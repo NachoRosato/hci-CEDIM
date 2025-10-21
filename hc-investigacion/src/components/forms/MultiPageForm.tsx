@@ -9,6 +9,7 @@ import { FormConfig, FormState, FormData } from './types';
 import { FormPackageComponent } from './FormPackage';
 import { FormNavigation } from './FormNavigation';
 import { FormPreview } from './FormPreview';
+import { Toast } from '@/components/ui/Toast';
 
 interface MultiPageFormProps {
   config: FormConfig;
@@ -101,8 +102,9 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
   });
 
   const [showPreview, setShowPreview] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
-  // Cargar datos desde localStorage al inicializar
+  // Cargar datos desde localStorage al inicializar (solo una vez)
   useEffect(() => {
     const savedData = localStorage.getItem(`form_${config.id}_data`);
     const savedState = localStorage.getItem(`form_${config.id}_state`);
@@ -120,7 +122,8 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
         console.warn('Error loading saved form data:', error);
       }
     }
-  }, [config.id, initialData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.id]); // Solo ejecutar cuando cambia el ID del form
 
   // Guardar datos en localStorage cuando cambien
   useEffect(() => {
@@ -130,7 +133,7 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
       completedPages: formState.completedPages,
       errors: formState.errors
     }));
-  }, [formState, config.id]);
+  }, [formState.data, formState.currentPage, formState.completedPages, formState.errors, config.id]);
 
   const currentPage = config.pages.find(page => page.id === `page_${formState.currentPage}`);
   const totalPages = config.pages.length;
@@ -181,6 +184,11 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
         currentPage: nextPage,
         completedPages: [...new Set([...prev.completedPages, formState.currentPage])]
       }));
+      // Scroll al inicio de la página
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Mostrar Toast de advertencia cuando hay campos requeridos sin completar
+      setShowToast(true);
     }
   };
 
@@ -190,12 +198,17 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
         ...prev,
         currentPage: prev.currentPage - 1
       }));
+      // Scroll al inicio de la página
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handleSubmit = () => {
     if (validateCurrentPage()) {
       onSubmit(formState.data);
+    } else {
+      // Mostrar Toast de advertencia cuando hay campos requeridos sin completar
+      setShowToast(true);
     }
   };
 
@@ -229,36 +242,27 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
 
   return (
     <FormContainer>
-      <FormHeader>
-        <FormTitle>{config.title}</FormTitle>
-        {config.description && (
-          <FormDescription>{config.description}</FormDescription>
-        )}
-      </FormHeader>
-
-      <ProgressBar>
-        <ProgressFill progress={progress} />
-      </ProgressBar>
-
+      <Toast
+        open={showToast}
+        onClose={() => setShowToast(false)}
+        text="Complete los datos requeridos"
+        tone="warning"
+        duration={3500}
+      />
+      
       <PageContainer>
         {currentPage && (
-          <>
-            <PageHeader>
-              <PageTitle>{currentPage.title}</PageTitle>
-            </PageHeader>
-            
-            <PackagesContainer>
-              {currentPage.packages.map((packageData) => (
-                <FormPackageComponent
-                  key={packageData.id}
-                  package={packageData}
-                  data={formState.data}
-                  errors={formState.errors}
-                  onFieldChange={handleFieldChange}
-                />
-              ))}
-            </PackagesContainer>
-          </>
+          <PackagesContainer>
+            {currentPage.packages.map((packageData) => (
+              <FormPackageComponent
+                key={packageData.id}
+                package={packageData}
+                data={formState.data}
+                errors={formState.errors}
+                onFieldChange={handleFieldChange}
+              />
+            ))}
+          </PackagesContainer>
         )}
       </PageContainer>
 

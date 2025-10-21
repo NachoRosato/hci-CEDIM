@@ -74,6 +74,30 @@ const GlobalStyle = createGlobalStyle<{ mode?: 'blue' | 'silver' | 'default' }>`
     font-weight: 400;
     font-size: 14px;
   }
+  .rb10l{
+    font-family: 'Rubik', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+  }
+  .rb10b{
+    font-family: 'Rubik', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .rb9b{
+    font-family: 'Rubik', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 9px;
+  }
+  .rb8l{
+    font-family: 'Rubik', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+  }
 
   /* Tipografías adicionales (legacy) */
   .rb52b{

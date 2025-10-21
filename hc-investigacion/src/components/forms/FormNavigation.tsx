@@ -82,14 +82,15 @@ const SuccessButton = styled(Button)`
   }
 `;
 
-const OutlineButton = styled(Button)`
-  background-color: transparent;
-  color: var(--color-grey65);
-  border: 1px solid var(--color-grey65);
+const OutlineButton = styled(Button)<{ $isActive?: boolean }>`
+  background-color: ${props => props.$isActive ? 'var(--color-latex30)' : 'transparent'};
+  color: ${props => props.$isActive ? 'var(--color-white)' : 'var(--color-grey65)'};
+  border: 1px solid ${props => props.$isActive ? 'var(--color-latex30)' : 'var(--color-grey65)'};
   
   &:hover:not(:disabled) {
-    background-color: var(--color-grey97);
-    color: var(--color-black35);
+    background-color: ${props => props.$isActive ? 'var(--color-latex10)' : 'var(--color-grey97)'};
+    color: ${props => props.$isActive ? 'var(--color-white)' : 'var(--color-black35)'};
+    border-color: ${props => props.$isActive ? 'var(--color-latex10)' : 'var(--color-grey65)'};
   }
 `;
 
@@ -134,6 +135,7 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
         <OutlineButton
           onClick={onPrevious}
           disabled={!canGoPrevious}
+          $isActive={canGoPrevious}
         >
           ← Anterior
         </OutlineButton>
@@ -144,14 +146,15 @@ export const FormNavigation: React.FC<FormNavigationProps> = ({
       </NavigationGroup>
 
       <NavigationGroup>
-        {onSave && (
+        {/* Comentado temporalmente - Guardar automático */}
+        {/* {onSave && (
           <>
             <SecondaryButton onClick={onSave}>
               💾 Guardar
             </SecondaryButton>
             <SaveIndicator>Datos guardados automáticamente</SaveIndicator>
           </>
-        )}
+        )} */}
         
         <SecondaryButton onClick={onPreview}>
           👁️ Vista Previa

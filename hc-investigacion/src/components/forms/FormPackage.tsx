@@ -71,10 +71,51 @@ export const FormPackageComponent: React.FC<FormPackageProps> = ({
   onFieldChange,
   disabled = false
 }) => {
-  // Dividir campos en dos columnas
-  const fieldsPerColumn = Math.ceil(packageData.fields.length / 2);
-  const leftColumnFields = packageData.fields.slice(0, fieldsPerColumn);
-  const rightColumnFields = packageData.fields.slice(fieldsPerColumn);
+  // Agrupar checkboxes con sus campos de detalle (si el siguiente campo termina en _detalle)
+  const groupedFields: Array<{ main: typeof packageData.fields[0], detail?: typeof packageData.fields[0] }> = [];
+  
+  for (let i = 0; i < packageData.fields.length; i++) {
+    const currentField = packageData.fields[i];
+    const nextField = packageData.fields[i + 1];
+    
+    // Si el siguiente campo es un detalle del actual, agrúpalos
+    if (nextField && nextField.id === `${currentField.id}_detalle`) {
+      groupedFields.push({ main: currentField, detail: nextField });
+      i++; // Saltar el siguiente campo ya que lo agrupamos
+    } else {
+      groupedFields.push({ main: currentField });
+    }
+  }
+
+  // Dividir en dos columnas
+  const fieldsPerColumn = Math.ceil(groupedFields.length / 2);
+  const leftColumnGroups = groupedFields.slice(0, fieldsPerColumn);
+  const rightColumnGroups = groupedFields.slice(fieldsPerColumn);
+
+  const renderFieldGroup = (group: typeof groupedFields[0]) => {
+    const showDetail = group.detail && data[group.main.id];
+    
+    return (
+      <React.Fragment key={group.main.id}>
+        <FormFieldComponent
+          field={group.main}
+          value={data[group.main.id]}
+          error={errors[group.main.id]}
+          onChange={(value) => onFieldChange(group.main.id, value)}
+          disabled={disabled}
+        />
+        {showDetail && group.detail && (
+          <FormFieldComponent
+            field={group.detail}
+            value={data[group.detail.id]}
+            error={errors[group.detail.id]}
+            onChange={(value) => onFieldChange(group.detail.id, value)}
+            disabled={disabled}
+          />
+        )}
+      </React.Fragment>
+    );
+  };
 
   return (
     <PackageContainer>
@@ -87,29 +128,11 @@ export const FormPackageComponent: React.FC<FormPackageProps> = ({
       
       <FieldsGrid>
         <FieldGroup>
-          {leftColumnFields.map((field) => (
-            <FormFieldComponent
-              key={field.id}
-              field={field}
-              value={data[field.id]}
-              error={errors[field.id]}
-              onChange={(value) => onFieldChange(field.id, value)}
-              disabled={disabled}
-            />
-          ))}
+          {leftColumnGroups.map(renderFieldGroup)}
         </FieldGroup>
         
         <FieldGroup>
-          {rightColumnFields.map((field) => (
-            <FormFieldComponent
-              key={field.id}
-              field={field}
-              value={data[field.id]}
-              error={errors[field.id]}
-              onChange={(value) => onFieldChange(field.id, value)}
-              disabled={disabled}
-            />
-          ))}
+          {rightColumnGroups.map(renderFieldGroup)}
         </FieldGroup>
       </FieldsGrid>
     </PackageContainer>
