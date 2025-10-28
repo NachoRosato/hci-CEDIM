@@ -30,6 +30,13 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Ej: Jane Doe'
             },
             {
+              id: 'sexo',
+              label: 'Sexo',
+              type: 'radio',
+              required: true,
+              options: ['F', 'M']
+            },
+            {
               id: 'domicilio',
               label: 'Domicilio',
               type: 'text',
@@ -44,6 +51,12 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Ej: 40559615'
             },
             {
+              id: 'fecha_nacimiento',
+              label: 'Fecha de Nacimiento',
+              type: 'date',
+              required: true
+            },
+            {
               id: 'edad',
               label: 'Edad',
               type: 'number',
@@ -55,17 +68,39 @@ export const evolucionFormConfig: FormConfig = {
               }
             },
             {
-              id: 'fecha_nacimiento',
-              label: 'Fecha de Nacimiento',
-              type: 'date',
-              required: true
+              id: 'tel1',
+              label: 'Tel.1',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: 115569605'
+            },
+            {
+              id: 'contacto',
+              label: 'Contacto',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: John Doe'
+            },
+            {
+              id: 'tel2',
+              label: 'Tel.2',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: 115569605'
             },
             {
               id: 'profesion_tarea',
               label: 'Profesión/Tarea Actual',
               type: 'text',
               required: false,
-              placeholder: 'Ej: Abogada, Profesor, etc.'
+              placeholder: 'Ej: Abogada, Profesor, Desempleado, Ama de casa, etc.'
+            },
+            {
+              id: 'profesion_anterior',
+              label: 'Anterior',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Abogada, Profesor, Desempleado, Ama de casa, etc.'
             }
           ]
         },
@@ -79,44 +114,47 @@ export const evolucionFormConfig: FormConfig = {
             {
               id: 'movilizacion',
               label: 'Puede movilizarse',
-              type: 'select',
+              type: 'radio',
               required: true,
-              options: ['Sin dificultad', 'Con dificultad leve', 'Con dificultad moderada', 'Con dificultad severa']
+              options: ['Sin dificultad', 'Con dificultad']
             },
             {
-              id: 'transporte_propio',
+              id: 'movilidad_propia',
               label: 'Con movilidad propia',
-              type: 'checkbox'
+              type: 'checkbox',
+              required: false
             },
             {
-              id: 'transporte_publico',
-              label: 'Con transporte público',
-              type: 'checkbox'
-            },
-            {
-              id: 'transporte_privado',
-              label: 'Con transporte privado',
-              type: 'checkbox'
+              id: 'con_transporte',
+              label: 'Con transporte',
+              type: 'radio',
+              required: false,
+              options: ['Publico', 'Privado']
             },
             {
               id: 'acceso_transporte',
               label: 'Accede sin dificultad al transporte',
-              type: 'checkbox'
+              type: 'checkbox',
+              required: false
             },
             {
               id: 'salida_casa',
               label: 'Puede salir sin dificultad de su casa',
-              type: 'checkbox'
+              type: 'checkbox',
+              required: false
             },
             {
-              id: 'calle_asfalto',
-              label: 'Calle de asfalto',
-              type: 'checkbox'
+              id: 'tipo_calle',
+              label: 'Calle',
+              type: 'radio',
+              required: false,
+              options: ['Calle de asfalto', 'Calle de tierra']
             },
             {
               id: 'transporte_casa',
               label: 'El transporte llega hasta su casa',
-              type: 'checkbox'
+              type: 'checkbox',
+              required: false
             }
           ]
         }
@@ -714,6 +752,13 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Ej: Satisface necesidades básicas. Tiene cobertura médica...'
             },
             {
+              id: 'no_satisface_necesidades_basicas',
+              label: 'No satisface necesidades básicas',
+              type: 'textarea',
+              required: true,
+              placeholder: 'Ej: NO satisface necesidades básicas...'
+            },
+            {
               id: 'comentarios',
               label: 'Comentarios',
               type: 'textarea',
@@ -726,13 +771,634 @@ export const evolucionFormConfig: FormConfig = {
     },
     {
       id: 'page_7',
+      title: 'Examen Físico - Estado Actual',
+      packages: [
+        {
+          id: 'examen_general',
+          title: 'Exámen General',
+          description: 'Evaluación general del estado físico del paciente',
+          page: 7,
+          order: 1,
+          fields: [
+            {
+              id: 'constitucion',
+              label: 'Constitución',
+              type: 'text',
+              required: false,
+              placeholder: ''
+            },
+            {
+              id: 'fascie',
+              label: 'Fascie',
+              type: 'text',
+              required: false,
+              placeholder: ''
+            },
+            {
+              id: 'imc_examen',
+              label: 'IMC',
+              type: 'number',
+              required: true,
+              placeholder: 'Ej: 25.1'
+            },
+            {
+              id: 'peso_examen',
+              label: 'Peso',
+              type: 'number',
+              required: true,
+              placeholder: 'Ej: 74 kg'
+            },
+            {
+              id: 'altura_examen',
+              label: 'Altura',
+              type: 'number',
+              required: true,
+              placeholder: 'Ej: 187 cm'
+            },
+            {
+              id: 'sc',
+              label: 'SC',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'comentario_examen',
+              label: 'Comentario',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej: Pesaje realizado con ropa liviana, sin calzado. Vejiga vacia.'
+            }
+          ]
+        },
+        {
+          id: 'tsc_evaluacion',
+          title: 'TSC',
+          description: 'Evaluación de características físicas y distribución',
+          page: 7,
+          order: 2,
+          fields: [
+            {
+              id: 'edema',
+              label: 'Edema',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'edema_detalle',
+              label: 'Detalle de Edema',
+              type: 'text',
+              required: false,
+              placeholder: 'Especificar localización y características'
+            },
+            {
+              id: 'dist_adiposa',
+              label: 'Dist. Adiposa',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: Acorde al sexo y edad'
+            },
+            {
+              id: 'adenopatias',
+              label: 'Adenopatías',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'adenopatias_detalle',
+              label: 'Detalle de Adenopatías',
+              type: 'text',
+              required: false,
+              placeholder: 'Especificar localización y características'
+            },
+            {
+              id: 'raza',
+              label: 'Raza',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: caucásico'
+            },
+            {
+              id: 'etnia',
+              label: 'Etnia',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Mapuche'
+            }
+          ]
+        },
+        {
+          id: 'piel_faneras',
+          title: 'Piel y Faneras',
+          description: 'Evaluación de piel, cabello y uñas',
+          page: 7,
+          order: 3,
+          fields: [
+            {
+              id: 'piel_faneras',
+              label: 'Piel y Faneras',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej:'
+            }
+          ]
+        },
+        {
+          id: 'cabeza',
+          title: 'Cabeza',
+          description: 'Evaluación de órganos de la cabeza',
+          page: 7,
+          order: 4,
+          fields: [
+            {
+              id: 'ojos',
+              label: 'Ojos',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: Conjutivos'
+            },
+            {
+              id: 'vision',
+              label: 'Visión',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Presbicia'
+            },
+            {
+              id: 'reflejos',
+              label: 'Reflejos',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Conservados'
+            },
+            {
+              id: 'boca',
+              label: 'Boca',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Fauces'
+            },
+            {
+              id: 'nariz',
+              label: 'Nariz',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Senos Paranasales'
+            },
+            {
+              id: 'oidos',
+              label: 'Oídos',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: normales'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'page_8',
+      title: 'Examen Físico - Cuello y Tórax',
+      packages: [
+        {
+          id: 'cuello',
+          title: 'Cuello',
+          description: 'Evaluación del cuello y estructuras relacionadas',
+          page: 8,
+          order: 1,
+          fields: [
+            {
+              id: 'inspeccion_cuello',
+              label: 'Inspección',
+              type: 'textarea',
+              required: true,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'lat_arteriales',
+              label: 'Lat. Arteriales',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Presentes'
+            },
+            {
+              id: 'lat_venosas',
+              label: 'Lat. Venosas',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: No'
+            },
+            {
+              id: 'tiroides',
+              label: 'Tiroides',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: No palpable'
+            },
+            {
+              id: 't_yugular',
+              label: 'T. Yugular',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: No'
+            },
+            {
+              id: 'auscultacion_vde_c',
+              label: 'Auscultación Vde C',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: No hay soplos'
+            }
+          ]
+        },
+        {
+          id: 'torax_aparato_respiratorio',
+          title: 'Tórax Aparato Respiratorio',
+          description: 'Evaluación del sistema respiratorio',
+          page: 8,
+          order: 2,
+          fields: [
+            {
+              id: 'f_resp',
+              label: 'F. Resp:',
+              type: 'number',
+              required: true,
+              placeholder: 'Ej: 16'
+            },
+            {
+              id: 'rmp',
+              label: 'RMP',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'tipo_resp',
+              label: 'Tipo Resp.',
+              type: 'radio',
+              required: false,
+              options: ['A', 'T']
+            },
+            {
+              id: 'comentarios_respiratorio',
+              label: 'Comentarios',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej: Buena emitida de aire, no hay soplos...'
+            }
+          ]
+        },
+        {
+          id: 'torax_aparato_cardiovascular',
+          title: 'Tórax Aparato Cardiovascular',
+          description: 'Evaluación del sistema cardiovascular',
+          page: 8,
+          order: 3,
+          fields: [
+            {
+              id: 'inspeccion_cardiovascular',
+              label: 'Inspección',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'zmi',
+              label: 'ZMI',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'fremitos',
+              label: 'Frémitos',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: No'
+            },
+            {
+              id: 'frote',
+              label: 'Frote',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: No'
+            },
+            {
+              id: 'ta_cardiovascular',
+              label: 'TA',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'ausc_1r',
+              label: '1R',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'ausc_plus',
+              label: '+',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'ausc_2r',
+              label: '2R',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'ausc_3r',
+              label: '3R',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'ausc_4r',
+              label: '4R',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'ausc_clic',
+              label: 'Clic',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'soplos',
+              label: 'Soplos',
+              type: 'checkbox',
+              required: false
+            },
+            {
+              id: 'soplos_detalle',
+              label: 'Detalle de Soplos',
+              type: 'text',
+              required: false,
+              placeholder: 'Especificar características'
+            },
+            {
+              id: 'comentarios_cardiovascular',
+              label: 'Comentarios',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej: Se procede a determinar el brazo dominante en un ambiente relajado, con la vejiga vacía...'
+            },
+            {
+              id: 'brazo',
+              label: 'Brazo',
+              type: 'radio',
+              required: true,
+              options: ['Izquierdo', 'Derecho']
+            },
+            {
+              id: 'tabd',
+              label: 'TABD',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej:149/89'
+            },
+            {
+              id: 'tabd1',
+              label: 'TABD1',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej:146/90'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'page_9',
+      title: 'Examen Físico - Vascular Periférico y Abdomen',
+      packages: [
+        {
+          id: 'vascular_periferico',
+          title: 'Vasc. Periférico',
+          description: 'Evaluación del sistema vascular periférico',
+          page: 9,
+          order: 1,
+          fields: [
+            {
+              id: 'pulso_radial_der',
+              label: 'Pulso Radial Der.',
+              type: 'radio',
+              required: true,
+              options: ['+', '-', 'Normal']
+            },
+            {
+              id: 'pulso_radial_izq',
+              label: 'Izq.',
+              type: 'radio',
+              required: false,
+              options: ['+', '-', 'Normal']
+            },
+            {
+              id: 'amplitud',
+              label: 'Amplitud',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Conservada'
+            },
+            {
+              id: 'frecuencia',
+              label: 'Frecuencia',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: Conservada'
+            },
+            {
+              id: 'ritmo',
+              label: 'Ritmo',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Regular'
+            },
+            {
+              id: 'pulso_pedio_der',
+              label: 'Pulso Pedio Der.',
+              type: 'radio',
+              required: false,
+              options: ['+', '-', 'Normal']
+            },
+            {
+              id: 'pulso_pedio_izq',
+              label: 'Izq.',
+              type: 'radio',
+              required: true,
+              options: ['+', '-', 'Normal']
+            },
+            {
+              id: 'p_femoral_der',
+              label: 'P. Femoral Der.',
+              type: 'radio',
+              required: false,
+              options: ['+', '-', 'Normal']
+            },
+            {
+              id: 'p_femoral_izq',
+              label: 'Izq.',
+              type: 'radio',
+              required: false,
+              options: ['+', '-', 'Normal']
+            },
+            {
+              id: 'comentarios_vascular',
+              label: 'Comentarios',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej: En la misma posición y ambiente, se proceden a realizar 2 mediciones de TA y FC con una diferencia en e brazo dominante..'
+            },
+            {
+              id: 'ta1',
+              label: 'TA₁',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: 145/81'
+            },
+            {
+              id: 'ta2',
+              label: 'TA₂',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: 140/79'
+            },
+            {
+              id: 'comentarios_ta',
+              label: 'Comentarios (TA)',
+              type: 'text',
+              required: false,
+              placeholder: 'Ej: Con presurómetro autorizado'
+            },
+            {
+              id: 'fc1',
+              label: 'FC₁',
+              type: 'text',
+              required: false,
+              placeholder: "Ej: 65x'"
+            },
+            {
+              id: 'fc2',
+              label: 'FC₂',
+              type: 'text',
+              required: true,
+              placeholder: "Ej: 66x'"
+            },
+            {
+              id: 'comentarios_fc',
+              label: 'Comentarios (FC)',
+              type: 'text',
+              required: false,
+              placeholder: "Ej: Mediante palpitación radial por 1'"
+            }
+          ]
+        },
+        {
+          id: 'abdomen',
+          title: 'Abdomen',
+          description: 'Evaluación abdominal',
+          page: 9,
+          order: 2,
+          fields: [
+            {
+              id: 'abdomen',
+              label: 'Abdomen',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej:'
+            }
+          ]
+        },
+        {
+          id: 'urogenital',
+          title: 'Urogenital',
+          description: 'Evaluación del sistema urogenital',
+          page: 9,
+          order: 3,
+          fields: [
+            {
+              id: 'urogenital',
+              label: 'Urogenital',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej:'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'page_10',
+      title: 'SOMA - Neurologico',
+      packages: [
+        {
+          id: 'soma_neurologico',
+          title: 'Evaluación Somática y Neurológica',
+          description: 'Evaluación del sistema somático y neurológico',
+          page: 10,
+          order: 1,
+          fields: [
+            {
+              id: 'soma',
+              label: 'SOMA',
+              type: 'textarea',
+              required: true,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'neurologico',
+              label: 'Neurológico',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej:'
+            },
+            {
+              id: 'comentarios_soma',
+              label: 'Comentarios',
+              type: 'textarea',
+              required: true,
+              placeholder: 'Ej:'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'page_11',
+      title: 'Evolución',
+      packages: [
+        {
+          id: 'evolucion',
+          title: 'Evolución del Paciente',
+          description: 'Registro de la evolución general del paciente',
+          page: 11,
+          order: 1,
+          fields: [
+            {
+              id: 'evolucion',
+              label: 'Evolución',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Ej:'
+            }
+          ]
+        }
+      ]
+    }
+    // Páginas 13 y 14 comentadas temporalmente hasta completar página 12
+    /* 
+    ,{
+      id: 'page_13',
       title: 'Signos Vitales y Evaluación Clínica',
       packages: [
         {
           id: 'signos_vitales_evolucion',
           title: 'Signos Vitales',
           description: 'Mediciones actuales del paciente',
-          page: 7,
+          page: 13,
           order: 1,
           fields: [
             {
@@ -799,7 +1465,7 @@ export const evolucionFormConfig: FormConfig = {
           id: 'evaluacion_clinica',
           title: 'Evaluación Clínica',
           description: 'Evaluación del estado actual del paciente',
-          page: 7,
+          page: 13,
           order: 2,
           fields: [
             {
@@ -840,14 +1506,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_8',
+      id: 'page_14',
       title: 'Criterios y Seguimiento',
       packages: [
         {
           id: 'criterios_evaluacion',
           title: 'Criterios de Evaluación',
           description: 'Criterios específicos para el protocolo ANT-010 RED',
-          page: 8,
+          page: 14,
           order: 1,
           fields: [
             {
@@ -888,7 +1554,7 @@ export const evolucionFormConfig: FormConfig = {
           id: 'seguimiento_tratamiento',
           title: 'Seguimiento y Tratamiento',
           description: 'Plan de seguimiento y modificaciones al tratamiento',
-          page: 8,
+          page: 14,
           order: 2,
           fields: [
             {
@@ -930,5 +1596,6 @@ export const evolucionFormConfig: FormConfig = {
         }
       ]
     }
+    */
   ]
 };

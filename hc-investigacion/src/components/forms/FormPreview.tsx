@@ -82,6 +82,12 @@ const FieldValue = styled.span`
   background-color: var(--color-grey97);
   border-radius: 6px;
   min-height: 20px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  display: block;
   
   &.empty {
     color: var(--color-grey65);

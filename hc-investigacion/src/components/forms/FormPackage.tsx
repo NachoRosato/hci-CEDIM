@@ -18,50 +18,79 @@ interface FormPackageProps {
 }
 
 const PackageContainer = styled.div`
-  background-color: var(--color-white);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-grey90);
+  background: linear-gradient(135deg, var(--color-white) 0%, #f8f9ff 100%);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(0, 54, 232, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 54, 232, 0.08);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 54, 232, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+    border-color: rgba(0, 54, 232, 0.15);
+  }
 `;
 
 const PackageHeader = styled.div`
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--color-latex95);
+  background: linear-gradient(135deg, var(--color-latex30) 0%, #0283C0 100%);
+  padding: 20px 24px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.3) 50%, 
+      transparent 100%
+    );
+  }
 `;
 
 const PackageTitle = styled.h3`
   font-family: 'Rubik', sans-serif;
   font-weight: 700;
-  font-size: 18px;
-  color: var(--color-latex10);
-  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: var(--color-white);
+  margin: 0 0 6px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.02em;
 `;
 
 const PackageDescription = styled.p`
   font-family: 'Rubik', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  color: var(--color-grey65);
+  color: rgba(255, 255, 255, 0.95);
   margin: 0;
+  line-height: 1.5;
 `;
 
 const FieldsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 28px;
+  padding: 28px;
+  background: var(--color-white);
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
+    padding: 20px;
   }
 `;
 
 const FieldGroup = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 4px;
 `;
 
 export const FormPackageComponent: React.FC<FormPackageProps> = ({
@@ -94,6 +123,7 @@ export const FormPackageComponent: React.FC<FormPackageProps> = ({
 
   const renderFieldGroup = (group: typeof groupedFields[0]) => {
     const showDetail = group.detail && data[group.main.id];
+    const detailField = group.detail;
     
     return (
       <React.Fragment key={group.main.id}>
@@ -104,12 +134,12 @@ export const FormPackageComponent: React.FC<FormPackageProps> = ({
           onChange={(value) => onFieldChange(group.main.id, value)}
           disabled={disabled}
         />
-        {showDetail && group.detail && (
+        {showDetail && detailField && (
           <FormFieldComponent
-            field={group.detail}
-            value={data[group.detail.id]}
-            error={errors[group.detail.id]}
-            onChange={(value) => onFieldChange(group.detail.id, value)}
+            field={detailField}
+            value={data[detailField.id]}
+            error={errors[detailField.id]}
+            onChange={(value) => onFieldChange(detailField.id, value)}
             disabled={disabled}
           />
         )}

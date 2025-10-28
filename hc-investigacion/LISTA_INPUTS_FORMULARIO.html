@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Completa de Inputs - Formulario de Evolución Médica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            margin: 2cm;
+            size: A4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #0283C0;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #030e35;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .summary h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .summary ul {
+            list-style: none;
+            font-size: 18px;
+        }
+
+        .summary li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary li::before {
+            content: "✓";
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .page-section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .page-title {
+            background: linear-gradient(135deg, #0283C0 0%, #027BB5 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(2, 131, 192, 0.3);
+        }
+
+        .package-section {
+            margin-bottom: 30px;
+            padding-left: 15px;
+        }
+
+        .package-title {
+            font-size: 18px;
+            color: #030e35;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .required-yes {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .required-no {
+            color: #95a5a6;
+        }
+
+        .page-total {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 15px;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(240, 147, 251, 0.4);
+        }
+
+        .commented-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            margin-top: 40px;
+        }
+
+        .commented-section h2 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .stats-section h2 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .notes-section {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .notes-section h2 {
+            color: #856404;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .notes-section ul {
+            list-style-position: inside;
+            color: #856404;
+        }
+
+        .notes-section li {
+            padding: 5px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .page-section {
+                page-break-inside: avoid;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-required {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-optional {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Lista Completa de Inputs</h1>
+            <h2 style="color: #0283C0; font-size: 20px; font-weight: 400;">Formulario de Evolución Médica</h2>
+        </div>
+
+        <div class="summary">
+            <h2>📊 Resumen</h2>
+            <ul>
+                <li><strong>Total de páginas activas:</strong> 11</li>
+                <li><strong>Total de inputs:</strong> 169 campos</li>
+                <li><strong>Campos requeridos:</strong> 32</li>
+            </ul>
+        </div>
+
+        <!-- Página 1 -->
+        <div class="page-section">
+            <div class="page-title">Página 1: Datos del Paciente y Evolución</div>
+            
+            <div class="package-section">
+                <div class="package-title">📝 Package: Datos del Paciente</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Apellidos y Nombres</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Sexo</td><td>radio</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Domicilio</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>DNI</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Fecha de Nacimiento</td><td>date</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Edad</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Tel.1</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Contacto</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Tel.2</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Profesión/Tarea Actual</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Anterior</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🚶 Package: Accesibilidad</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Puede movilizarse</td><td>radio</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Con movilidad propia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Con transporte</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Accede sin dificultad al transporte</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Puede salir sin dificultad de su casa</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Calle</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>El transporte llega hasta su casa</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 1: 18 campos (8 requeridos)</div>
+        </div>
+
+        <!-- Página 2 -->
+        <div class="page-section">
+            <div class="page-title">Página 2: Antecedentes Patológicos Confirmados</div>
+            
+            <div class="package-section">
+                <div class="package-title">🏥 Package: Antecedentes Patológicos - Parte I</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ACV</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Aneur. Aort. Reparado</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Alergia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Alergia</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Amenorrea</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Amputación</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Amputación</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Angiop./aterectomía</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Arritmia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Artrosis/A.R.</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Cataratas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Cefaleas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Cirug./angiop. Art. perif.</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Claudicación intermitente</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>E.P.O.C.</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Fracturas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Fracturas</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Gastritis</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Hemorroides</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Hepatopatía</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Hernia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🏥 Package: Antecedentes Patológicos - Parte II</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>HTA (Hipertensión Arterial)</td><td>checkbox</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Climaterio</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Anemia/H. Hemat</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Colagenoapatía</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Colagenoapatía</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Colagenoapatía (otra)</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar otra Colagenoapatía</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Constipación</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Constipación</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Diabetes</td><td>checkbox</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Dislipemia</td><td>checkbox</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Dismenorrea</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Incont. Urinaria</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Infec./Úlcera en extrem.</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Endarterectomía Carotídea</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enf. Coronaria</td><td>checkbox</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Especificar Enf. Coronaria</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enf. Ginecológicas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enf. Hemáticas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enf. Infecciosas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Enf. Infecciosas</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enf. T. Sexual</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Especificar Enf. T. Sexual</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enf. Oftalmológicas</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Enolismo</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Epilepsia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 2: 47 campos (4 requeridos)</div>
+        </div>
+
+        <!-- Página 3 -->
+        <div class="page-section">
+            <div class="page-title">Página 3: Antecedentes Patológicos Confirmados (Continuación)</div>
+            
+            <div class="package-section">
+                <div class="package-title">🏥 Package: Antecedentes Patológicos - Parte III</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Hiperuricemia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Hipoacusia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Hipot. ortost.</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Impotencia</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Insuf. Cardíaca</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Litiasis</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Lumbalgia</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Mareos</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Miocardiopatía</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Miopía</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Nefropatía</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Neuropatía</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🏥 Package: Antecedentes Patológicos - Parte IV</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Obesidad</td><td>checkbox</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Osteoporosis</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Parkinson</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Pat. Prostática</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Pat-Psiq.</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Pat. Tiroidea</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Pat. Tumoral</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Período Fértil</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Tabaquismo</td><td>checkbox</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Úlcera/H.D.</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Valvulopatía</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Várices</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 3: 24 campos (2 requeridos)</div>
+        </div>
+
+        <!-- Página 4 -->
+        <div class="page-section">
+            <div class="page-title">Página 4: Antecedentes Adicionales - Parte I</div>
+            
+            <div class="package-section">
+                <div class="package-title">📋 Package: Otros Antecedentes y Desarrollo</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Otros/Observaciones</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>A) Infancia</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>B) Adulto</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 4: 3 campos (0 requeridos)</div>
+        </div>
+
+        <!-- Página 5 -->
+        <div class="page-section">
+            <div class="page-title">Página 5: Antecedentes Adicionales - Parte II</div>
+            
+            <div class="package-section">
+                <div class="package-title">💊 Package: Intervenciones y Medicación</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>C) Operaciones</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>D) Traumas</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Medicación Actual</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 5: 3 campos (0 requeridos)</div>
+        </div>
+
+        <!-- Página 6 -->
+        <div class="page-section">
+            <div class="page-title">Página 6: Antecedentes Familiares y Socio-económicos</div>
+            
+            <div class="package-section">
+                <div class="package-title">👨‍👩‍👧‍👦 Package: Información Complementaria del Paciente</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Antecedentes Familiares</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Antecedentes Socio-económicos</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>No satisface necesidades básicas</td><td>textarea</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Comentarios</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 6: 4 campos (1 requerido)</div>
+        </div>
+
+        <!-- Página 7 -->
+        <div class="page-section">
+            <div class="page-title">Página 7: Examen Físico - Estado Actual</div>
+            
+            <div class="package-section">
+                <div class="package-title">🔍 Package: Exámen General</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Constitución</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Fascie</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>IMC</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Peso</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Altura</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>SC</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Comentario</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🔍 Package: TSC</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Edema</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Detalle de Edema</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Dist. Adiposa</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Adenopatías</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Detalle de Adenopatías</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Raza</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Etnia</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🔍 Package: Piel y Faneras</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Piel y Faneras</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🔍 Package: Cabeza</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ojos</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Visión</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Reflejos</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Boca</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Nariz</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Oídos</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 7: 21 campos (5 requeridos)</div>
+        </div>
+
+        <!-- Página 8 -->
+        <div class="page-section">
+            <div class="page-title">Página 8: Examen Físico - Cuello y Tórax</div>
+            
+            <div class="package-section">
+                <div class="package-title">🔍 Package: Cuello</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Inspección</td><td>textarea</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Lat. Arteriales</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Lat. Venosas</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Tiroides</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>T. Yugular</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Auscultación Vde C</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🫁 Package: Tórax Aparato Respiratorio</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>F. Resp:</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>RMP</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Tipo Resp.</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Comentarios</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">❤️ Package: Tórax Aparato Cardiovascular</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Inspección</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>ZMI</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Frémitos</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Frote</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>TA</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>1R</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>+</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>2R</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>3R</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>4R</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Clic</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Soplos</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Detalle de Soplos</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Comentarios</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Brazo</td><td>radio</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>TABD</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>TABD1</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 8: 27 campos (5 requeridos)</div>
+        </div>
+
+        <!-- Página 9 -->
+        <div class="page-section">
+            <div class="page-title">Página 9: Examen Físico - Vascular Periférico y Abdomen</div>
+            
+            <div class="package-section">
+                <div class="package-title">🩺 Package: Vasc. Periférico</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Pulso Radial Der.</td><td>radio</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Izq. (Pulso Radial)</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Amplitud</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Frecuencia</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Ritmo</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Pulso Pedio Der.</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Izq. (Pulso Pedio)</td><td>radio</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>P. Femoral Der.</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Izq. (P. Femoral)</td><td>radio</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Comentarios</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>TA₁</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>TA₂</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Comentarios (TA)</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>FC₁</td><td>text</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>FC₂</td><td>text</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Comentarios (FC)</td><td>text</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🩺 Package: Abdomen</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Abdomen</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="package-section">
+                <div class="package-title">🩺 Package: Urogenital</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Urogenital</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 9: 18 campos (5 requeridos)</div>
+        </div>
+
+        <!-- Página 10 -->
+        <div class="page-section">
+            <div class="page-title">Página 10: SOMA - Neurologico</div>
+            
+            <div class="package-section">
+                <div class="package-title">🧠 Package: Evaluación Somática y Neurológica</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>SOMA</td><td>textarea</td><td class="required-yes">✅ Sí</td></tr>
+                        <tr><td>Neurológico</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        <tr><td>Comentarios</td><td>textarea</td><td class="required-yes">✅ Sí</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 10: 3 campos (2 requeridos)</div>
+        </div>
+
+        <!-- Página 11 -->
+        <div class="page-section">
+            <div class="page-title">Página 11: Evolución</div>
+            
+            <div class="package-section">
+                <div class="package-title">📈 Package: Evolución del Paciente</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Input</th>
+                            <th>Tipo</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Evolución</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-total">Total Página 11: 1 campo (0 requeridos)</div>
+        </div>
+
+        <!-- Sección de páginas comentadas -->
+        <div class="commented-section">
+            <h2>⚠️ PÁGINAS COMENTADAS (No activas actualmente)</h2>
+            
+            <div class="page-section" style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <div class="page-title" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">Página 13: Signos Vitales y Evaluación Clínica</div>
+                
+                <div class="package-section">
+                    <div class="package-title">💉 Package: Signos Vitales</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre del Input</th>
+                                <th>Tipo</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Altura (cm)</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>Peso (kg)</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>Rango de Edad</td><td>select</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>TA Sistólica (mmHg)</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>TA Diastólica (mmHg)</td><td>number</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>TA Media (mmHg)</td><td>number</td><td class="required-no">❌ No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="package-section">
+                    <div class="package-title">🩺 Package: Evaluación Clínica</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre del Input</th>
+                                <th>Tipo</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Estado General</td><td>select</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>Tolerancia al Tratamiento</td><td>select</td><td class="required-yes">✅ Sí</td></tr>
+                            <tr><td>Efectos Adversos</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Descripción de Efectos Adversos</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Observaciones Clínicas</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="page-total" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">Total Página 13 (Comentada): 11 campos (7 requeridos)</div>
+            </div>
+
+            <div class="page-section" style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <div class="page-title" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">Página 14: Criterios y Seguimiento</div>
+                
+                <div class="package-section">
+                    <div class="package-title">✅ Package: Criterios de Evaluación</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre del Input</th>
+                                <th>Tipo</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>FA o aleteo auricular diagnosticados/documentados en un ECG o monitoreo</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>FA debida a una causa reversible aguda en curso</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>FA debida a una causa reversible aguda en curso (segunda instancia)</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>FA debida a una causa reversible aguda en curso (tercera instancia)</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>FA debida a una causa reversible aguda en curso (cuarta instancia)</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Observaciones sobre Criterios</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="package-section">
+                    <div class="package-title">📋 Package: Seguimiento y Tratamiento</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre del Input</th>
+                                <th>Tipo</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Modificación de Dosis</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Suspensión de Medicamento</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Nuevo Medicamento</td><td>checkbox</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Detalles de Modificaciones</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Próximo Control</td><td>date</td><td class="required-no">❌ No</td></tr>
+                            <tr><td>Observaciones Finales</td><td>textarea</td><td class="required-no">❌ No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="page-total" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">Total Página 14 (Comentada): 12 campos (0 requeridos)</div>
+            </div>
+        </div>
+
+        <!-- Resumen Estadístico -->
+        <div class="stats-section">
+            <h2>📊 RESUMEN ESTADÍSTICO</h2>
+            
+            <h3 style="margin-top: 20px; margin-bottom: 15px; font-size: 20px;">Por Página (Solo activas 1-11)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Página</th>
+                        <th>Total Campos</th>
+                        <th>Campos Requeridos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>18</td><td>8</td></tr>
+                    <tr><td>2</td><td>47</td><td>4</td></tr>
+                    <tr><td>3</td><td>24</td><td>2</td></tr>
+                    <tr><td>4</td><td>3</td><td>0</td></tr>
+                    <tr><td>5</td><td>3</td><td>0</td></tr>
+                    <tr><td>6</td><td>4</td><td>1</td></tr>
+                    <tr><td>7</td><td>21</td><td>5</td></tr>
+                    <tr><td>8</td><td>27</td><td>5</td></tr>
+                    <tr><td>9</td><td>18</td><td>5</td></tr>
+                    <tr><td>10</td><td>3</td><td>2</td></tr>
+                    <tr><td>11</td><td>1</td><td>0</td></tr>
+                    <tr style="font-weight: bold; background: rgba(255,255,255,0.2);"><td>TOTAL ACTIVO</td><td>169</td><td>32</td></tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 20px;">Por Tipo de Input (Solo activas)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>checkbox</td><td>70</td></tr>
+                    <tr><td>text</td><td>55</td></tr>
+                    <tr><td>textarea</td><td>21</td></tr>
+                    <tr><td>number</td><td>8</td></tr>
+                    <tr><td>radio</td><td>12</td></tr>
+                    <tr><td>date</td><td>2</td></tr>
+                    <tr><td>select</td><td>1</td></tr>
+                    <tr style="font-weight: bold; background: rgba(255,255,255,0.2);"><td>TOTAL</td><td>169</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Notas -->
+        <div class="notes-section">
+            <h2>📝 NOTAS</h2>
+            <ul>
+                <li>Las páginas 13 y 14 están comentadas en el código y NO se renderizan actualmente</li>
+                <li>Total de campos si se incluyen páginas comentadas: 192 campos</li>
+                <li>Este documento fue generado automáticamente del archivo <code>evolucionFormConfig.ts</code></li>
+                <li>Documento generado: Octubre 2025</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #e0e0e0; color: #7f8c8d;">
+            <p><strong>HC Investigación - Centro Médico</strong></p>
+            <p style="font-size: 14px;">Sistema de Gestión de Historia Clínica</p>
+        </div>
+    </div>
+
+    <script>
+        // Función para imprimir/exportar a PDF
+        window.addEventListener('load', function() {
+            console.log('Documento cargado. Para exportar a PDF:');
+            console.log('1. Ctrl+P (Cmd+P en Mac)');
+            console.log('2. Seleccionar "Guardar como PDF"');
+            console.log('3. Ajustar márgenes si es necesario');
+        });
+    </script>
+</body>
+</html>
+

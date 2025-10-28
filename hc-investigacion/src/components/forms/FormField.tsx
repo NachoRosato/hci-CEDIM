@@ -37,25 +37,33 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: 12px 16px;
-  border: 1px solid var(--color-grey90);
-  border-radius: 8px;
+  border: 2px solid var(--color-grey90);
+  border-radius: 10px;
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
   background-color: var(--color-white);
-  transition: border-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover:not(:disabled) {
+    border-color: var(--color-grey65);
+  }
   
   &:focus {
     outline: none;
     border-color: var(--color-latex30);
+    box-shadow: 0 0 0 3px rgba(0, 54, 232, 0.1);
+    transform: translateY(-1px);
   }
   
   &:disabled {
     background-color: var(--color-grey97);
     color: var(--color-grey45);
+    cursor: not-allowed;
   }
   
   &.error {
-    border-color: var(--color-latex30);
+    border-color: #FB5555;
+    background-color: rgba(251, 85, 85, 0.02);
   }
 `;
 
@@ -67,22 +75,29 @@ const TextAreaWrapper = styled.div`
 const TextArea = styled.textarea`
   padding: 12px 16px;
   padding-top: 16px;
-  border: 1px solid var(--color-grey90);
-  border-radius: 8px;
+  border: 2px solid var(--color-grey90);
+  border-radius: 10px;
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
   background-color: var(--color-white);
   resize: vertical;
   min-height: 120px;
   width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover:not(:disabled) {
+    border-color: var(--color-grey65);
+  }
   
   &:focus {
     outline: none;
     border-color: var(--color-latex30);
+    box-shadow: 0 0 0 3px rgba(0, 54, 232, 0.1);
   }
   
   &.error {
-    border-color: var(--color-latex30);
+    border-color: #FB5555;
+    background-color: rgba(251, 85, 85, 0.02);
   }
 `;
 
@@ -118,45 +133,65 @@ const FloatingButton = styled.button`
 
 const Select = styled.select`
   padding: 12px 16px;
-  border: 1px solid var(--color-grey90);
-  border-radius: 8px;
+  border: 2px solid var(--color-grey90);
+  border-radius: 10px;
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
   background-color: var(--color-white);
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover:not(:disabled) {
+    border-color: var(--color-grey65);
+  }
   
   &:focus {
     outline: none;
     border-color: var(--color-latex30);
+    box-shadow: 0 0 0 3px rgba(0, 54, 232, 0.1);
   }
   
   &.error {
-    border-color: var(--color-latex30);
+    border-color: #FB5555;
+    background-color: rgba(251, 85, 85, 0.02);
   }
 `;
 
 const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  padding: 8px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(0, 54, 232, 0.04);
+  }
 `;
 
 const Checkbox = styled.input`
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   accent-color: var(--color-latex30);
   cursor: pointer;
+  transition: transform 0.2s ease;
   
   &:hover {
     transform: scale(1.1);
+  }
+  
+  &:focus {
+    outline: 2px solid rgba(0, 54, 232, 0.3);
+    outline-offset: 2px;
   }
 `;
 
 const CheckboxLabel = styled.span`
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
+  font-weight: 500;
   color: var(--color-black35);
   cursor: pointer;
   user-select: none;
@@ -165,29 +200,58 @@ const CheckboxLabel = styled.span`
 const RadioGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 `;
 
 const RadioOption = styled.label`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: var(--color-black35);
+  
+  &:hover {
+    background-color: rgba(0, 54, 232, 0.04);
+  }
 `;
 
 const RadioInput = styled.input`
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   accent-color: var(--color-latex30);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &:focus {
+    outline: 2px solid rgba(0, 54, 232, 0.3);
+    outline-offset: 2px;
+  }
 `;
 
 const ErrorMessage = styled.span`
   font-family: 'Rubik', sans-serif;
   font-size: 12px;
-  color: var(--color-latex30);
+  font-weight: 500;
+  color: #FB5555;
   margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  &::before {
+    content: '⚠';
+    font-size: 14px;
+  }
 `;
 
 export const FormFieldComponent: React.FC<FormFieldProps> = ({

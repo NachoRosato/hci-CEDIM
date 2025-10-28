@@ -4,8 +4,9 @@ import { useEffect } from 'react';
 
 const Container = styled.div.attrs({
   className:
-    'fixed top-6 right-6 px-4 py-3 rounded-md shadow-lg text-white z-50',
+    'fixed top-6 right-6 px-4 py-3 rounded-md shadow-lg text-white',
 })<{ tone: 'danger' | 'success' | 'info' | 'warning' }>`
+  z-index: 99999;
   background: ${({ tone }) =>
     tone === 'danger'
       ? 'linear-gradient(95.53deg, #730700 1.56%, #c10c00 65.41%)'

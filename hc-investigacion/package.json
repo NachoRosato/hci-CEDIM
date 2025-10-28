@@ -10,7 +10,8 @@
     "lint": "next lint",
     "prepare": "husky",
     "test": "vitest",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "generate-pdf": "node scripts/generatePDF.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
