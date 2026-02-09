@@ -1,0 +1,296 @@
+// ================================================================
+// PRISMA SCHEMA - Sistema de Versionado de Formularios Médicos
+// Proyecto: HC Investigación - CEDIM
+// ================================================================
+//
+// Instrucciones de uso:
+// 1. Copia este contenido a tu archivo schema.prisma
+// 2. Ejecuta: npx prisma generate
+// 3. Ejecuta: npx prisma db push (o npx prisma migrate dev)
+//
+// ================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ================================================================
+// MODELO: User (Usuarios del sistema)
+// ================================================================
+model User {
+  id              String   @id @default(uuid()) @db.Uuid
+  email           String   @unique @db.VarChar(255)
+  nombreCompleto  String   @map("nombre_completo") @db.VarChar(255)
+  rol             UserRole
+  activo          Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  // Relaciones
+  patientsCreated     Patient[]          @relation("PatientCreatedBy")
+  formsCreated        EvolucionForm[]    @relation("FormCreatedBy")
+  versionsCreated     EvolucionVersion[] @relation("VersionCreatedBy")
+
+  @@index([email])
+  @@index([rol])
+  @@index([activo])
+  @@map("users")
+}
+
+enum UserRole {
+  medico
+  enfermero
+  admin
+  investigador
+
+  @@map("user_role")
+}
+
+// ================================================================
+// MODELO: Patient (Pacientes)
+// ================================================================
+model Patient {
+  id               String    @id @default(uuid()) @db.Uuid
+  dni              String    @unique @db.VarChar(20)
+  nombreCompleto   String    @map("nombre_completo") @db.VarChar(255)
+  fechaNacimiento  DateTime  @map("fecha_nacimiento") @db.Date
+  sexo             String    @db.VarChar(10)
+  domicilio        String?   @db.Text
+  telefono1        String?   @map("telefono_1") @db.VarChar(50)
+  telefono2        String?   @map("telefono_2") @db.VarChar(50)
+  contacto         String?   @db.VarChar(255)
+  hcd              String?   @db.VarChar(50) // Historia Clínica Digital
+  hcp              String?   @db.VarChar(50) // Historia Clínica Papel
+  activo           Boolean   @default(true)
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+  createdByUserId  String    @map("created_by_user_id") @db.Uuid
+
+  // Relaciones
+  createdBy        User              @relation("PatientCreatedBy", fields: [createdByUserId], references: [id])
+  evolucionForms   EvolucionForm[]
+
+  @@index([dni])
+  @@index([hcd])
+  @@index([hcp])
+  @@index([activo])
+  @@map("patients")
+}
+
+// ================================================================
+// MODELO: EvolucionForm (Formularios de Evolución)
+// ================================================================
+model EvolucionForm {
+  id                String             @id @default(uuid()) @db.Uuid
+  patientId         String             @map("patient_id") @db.Uuid
+  formNumber        Int                @map("form_number")
+  currentVersionId  String?            @map("current_version_id") @db.Uuid
+  status            FormStatus         @default(draft)
+  fechaEvolucion    DateTime           @default(now()) @map("fecha_evolucion") @db.Date
+  createdAt         DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt         DateTime           @updatedAt @map("updated_at") @db.Timestamptz
+  createdByUserId   String             @map("created_by_user_id") @db.Uuid
+
+  // Relaciones
+  patient           Patient            @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  createdBy         User               @relation("FormCreatedBy", fields: [createdByUserId], references: [id])
+  versions          EvolucionVersion[]
+  currentVersion    EvolucionVersion?  @relation("CurrentVersion", fields: [currentVersionId], references: [id], onDelete: SetNull)
+
+  @@unique([patientId, formNumber])
+  @@index([patientId])
+  @@index([status])
+  @@index([fechaEvolucion(sort: Desc)])
+  @@index([patientId, currentVersionId])
+  @@map("evolucion_forms")
+}
+
+enum FormStatus {
+  draft
+  in_progress
+  completed
+  archived
+  cancelled
+
+  @@map("form_status")
+}
+
+// ================================================================
+// MODELO: EvolucionVersion (Versiones del Formulario) ⭐
+// ================================================================
+model EvolucionVersion {
+  id                 String             @id @default(uuid()) @db.Uuid
+  formId             String             @map("form_id") @db.Uuid
+  versionNumber      Int                @map("version_number")
+  formData           Json               @map("form_data") // JSONB con los 169 campos
+  createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  createdByUserId    String             @map("created_by_user_id") @db.Uuid
+  comment            String?            @db.Text
+  isMajorVersion     Boolean            @default(false) @map("is_major_version")
+  previousVersionId  String?            @map("previous_version_id") @db.Uuid
+
+  // Relaciones
+  form               EvolucionForm      @relation(fields: [formId], references: [id], onDelete: Cascade)
+  createdBy          User               @relation("VersionCreatedBy", fields: [createdByUserId], references: [id])
+  previousVersion    EvolucionVersion?  @relation("VersionHistory", fields: [previousVersionId], references: [id])
+  nextVersions       EvolucionVersion[] @relation("VersionHistory")
+  changes            EvolucionChange[]
+  currentVersionOf   EvolucionForm[]    @relation("CurrentVersion")
+
+  @@unique([formId, versionNumber])
+  @@index([formId, versionNumber(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
+  @@index([createdByUserId])
+  @@index([isMajorVersion])
+  @@map("evolucion_versions")
+}
+
+// ================================================================
+// MODELO: EvolucionChange (Cambios Individuales) ⭐
+// ================================================================
+model EvolucionChange {
+  id                  String           @id @default(uuid()) @db.Uuid
+  versionId           String           @map("version_id") @db.Uuid
+  previousVersionId   String?          @map("previous_version_id") @db.Uuid
+  fieldName           String           @map("field_name") @db.VarChar(255)
+  fieldLabel          String?          @map("field_label") @db.VarChar(255)
+  oldValue            String?          @map("old_value") @db.Text
+  newValue            String?          @map("new_value") @db.Text
+  changeType          ChangeType       @map("change_type")
+  pageNumber          Int?             @map("page_number")
+  packageName         String?          @map("package_name") @db.VarChar(255)
+  createdAt           DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  // Relaciones
+  version             EvolucionVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+
+  @@index([versionId])
+  @@index([previousVersionId])
+  @@index([fieldName])
+  @@index([changeType])
+  @@index([createdAt(sort: Desc)])
+  @@index([versionId, fieldName])
+  @@map("evolucion_changes")
+}
+
+enum ChangeType {
+  added
+  modified
+  deleted
+
+  @@map("change_type")
+}
+
+// ================================================================
+// COMENTARIOS Y EJEMPLOS DE USO
+// ================================================================
+
+// EJEMPLO 1: Crear una nueva versión
+// ----------------------------------
+// const newVersion = await prisma.evolucionVersion.create({
+//   data: {
+//     formId: 'form-uuid',
+//     versionNumber: 2,
+//     formData: {
+//       nombre: 'Jane Doe',
+//       dni: '40559615',
+//       peso_examen: 75,
+//       // ... resto de campos
+//     },
+//     createdByUserId: 'user-uuid',
+//     comment: 'Actualización de peso',
+//     previousVersionId: 'previous-version-uuid'
+//   }
+// });
+
+// EJEMPLO 2: Obtener versión actual con todos los datos
+// ------------------------------------------------------
+// const currentVersion = await prisma.evolucionForm.findUnique({
+//   where: { id: 'form-uuid' },
+//   include: {
+//     currentVersion: {
+//       include: {
+//         createdBy: {
+//           select: {
+//             nombreCompleto: true,
+//             rol: true
+//           }
+//         }
+//       }
+//     }
+//   }
+// });
+
+// EJEMPLO 3: Obtener historial de versiones
+// ------------------------------------------
+// const versions = await prisma.evolucionVersion.findMany({
+//   where: { formId: 'form-uuid' },
+//   include: {
+//     createdBy: {
+//       select: {
+//         nombreCompleto: true,
+//         rol: true
+//       }
+//     },
+//     _count: {
+//       select: { changes: true }
+//     }
+//   },
+//   orderBy: { versionNumber: 'desc' }
+// });
+
+// EJEMPLO 4: Obtener cambios de una versión
+// ------------------------------------------
+// const changes = await prisma.evolucionChange.findMany({
+//   where: { versionId: 'version-uuid' },
+//   orderBy: [
+//     { pageNumber: 'asc' },
+//     { fieldName: 'asc' }
+//   ]
+// });
+
+// EJEMPLO 5: Buscar en JSONB (pacientes con HTA)
+// -----------------------------------------------
+// const patientsWithHTA = await prisma.$queryRaw`
+//   SELECT 
+//     p.nombre_completo,
+//     p.dni,
+//     v.form_data->>'hta' as tiene_hta
+//   FROM patients p
+//   JOIN evolucion_forms f ON p.id = f.patient_id
+//   JOIN evolucion_versions v ON f.current_version_id = v.id
+//   WHERE v.form_data->>'hta' = 'true'
+// `;
+
+// EJEMPLO 6: Transacción para crear versión + cambios
+// ----------------------------------------------------
+// const result = await prisma.$transaction(async (tx) => {
+//   // 1. Crear versión
+//   const version = await tx.evolucionVersion.create({
+//     data: { /* ... */ }
+//   });
+//   
+//   // 2. Crear cambios
+//   await tx.evolucionChange.createMany({
+//     data: changes.map(c => ({
+//       versionId: version.id,
+//       // ... resto de campos
+//     }))
+//   });
+//   
+//   // 3. Actualizar current_version_id
+//   await tx.evolucionForm.update({
+//     where: { id: formId },
+//     data: { currentVersionId: version.id }
+//   });
+//   
+//   return version;
+// });
+
+
+
