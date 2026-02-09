@@ -62,9 +62,9 @@ UsuarioSchema.methods.comparePassword = async function (candidatePassword: strin
 
 // Excluir password del JSON
 UsuarioSchema.set('toJSON', {
-  transform: (_doc, ret) => {
-    delete ret.password;
-    return ret;
+  transform: (_doc, ret: Record<string, unknown>) => {
+    const { password: _, ...rest } = ret;
+    return rest;
   },
 });
 
