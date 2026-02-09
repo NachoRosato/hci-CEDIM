@@ -113,6 +113,31 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
               </Link>
             </li>
           </ul>
+          {/* Sección ABM */}
+          <div className="mt-4 mb-2 px-1">
+            <div className="h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-3" />
+            <span className="rb10b c-grey65 uppercase tracking-wider">ABM</span>
+          </div>
+          <ul className="rb16m space-y-2">
+            <li>
+              <Link className="flex items-center gap-3 px-3 py-3 rounded bgc-latexAlternative c-white transition-transform will-change-transform hover:-translate-y-[1px] hover:shadow-md shadow-sm" href="/protected/abm/protocolos">
+                <DocIcon />
+                <span className="rb14b">ABM Protocolos</span>
+              </Link>
+            </li>
+            <li>
+              <Link className="flex items-center gap-3 px-3 py-3 rounded bgc-latexAlternative c-white transition-transform will-change-transform hover:-translate-y-[1px] hover:shadow-md shadow-sm" href="/protected/abm/tipos-protocolo">
+                <DocIcon />
+                <span className="rb14b">ABM Tipos Protocolo</span>
+              </Link>
+            </li>
+            <li>
+              <Link className="flex items-center gap-3 px-3 py-3 rounded bgc-latexAlternative c-white transition-transform will-change-transform hover:-translate-y-[1px] hover:shadow-md shadow-sm" href="/protected/abm/formulario-dinamico">
+                <GearIcon />
+                <span className="rb14b">Formulario Dinámico</span>
+              </Link>
+            </li>
+          </ul>
         </nav>
         <div className="px-4 py-2">
           <div className="h-[1px] mx-6 bg-gradient-to-r from-transparent via-white/60 to-transparent" />

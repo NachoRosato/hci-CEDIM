@@ -197,3 +197,8 @@ Si tienes problemas o preguntas sobre la generación del PDF:
 **Última actualización**: Octubre 2025  
 **Versión**: 1.0.0
 
+
+
+
+
+

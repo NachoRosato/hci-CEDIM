@@ -16,14 +16,17 @@ const version1Data: FormData = {
   apellidos_nombres: 'García López, María Elena',
   sexo: 'F',
   domicilio: 'Av. Rivadavia 1250, CABA',
+  localidad: 'CABA',
   dni: 28456789,
+  os_mpp: 'OSDE 310',
   fecha_nacimiento: '1978-03-15',
   edad: 45,
+  medico_cabecera: 'Dr. Roberto Fernández',
   tel1: '1145678901',
-  contacto: 'Juan García (Esposo)',
   tel2: '1156789012',
+  contacto: 'Juan García (Esposo)',
+  contacto_tel: '1167890123',
   profesion_tarea: 'Contadora',
-  profesion_anterior: 'Analista Administrativo',
   
   // Accesibilidad
   movilizacion: 'Sin dificultad',
@@ -33,6 +36,13 @@ const version1Data: FormData = {
   salida_casa: true,
   tipo_calle: 'Calle de asfalto',
   transporte_casa: true,
+  
+  // Página 2 - Primer Contacto
+  primer_contacto: 'Paciente acude a consulta programada para control de HTA. Refiere buen estado general. Sin síntomas relevantes en el último período. Adherente al tratamiento farmacológico. Realiza actividad física regular. Consulta motivada por control semestral habitual.',
+  
+  // Página 3 - Motivo de Consulta y Enfermedad Actual
+  motivo_consulta: 'Control de HTA y dislipemia. Solicitud de renovación de recetas.',
+  enfermedad_actual: 'Paciente de 45 años con diagnóstico de HTA desde hace 8 años y dislipemia desde hace 5 años, ambas en tratamiento farmacológico. Evolución favorable con buen control de cifras tensionales. Última evaluación de laboratorio (hace 3 meses) con perfil lipídico dentro de objetivos. Sin síntomas cardiovasculares actuales. Niega dolor precordial, disnea o palpitaciones. Realiza actividad física regular (caminatas 30 min/día). No eventos cardiovasculares en el último año.',
   
   // Página 2 - Antecedentes Patológicos I
   acv: false,
@@ -121,35 +131,33 @@ const version1Data: FormData = {
   no_satisface_necesidades_basicas: 'N/A - Paciente satisface todas las necesidades básicas',
   comentarios: 'Buena adhesión al tratamiento. Controles regulares cada 6 meses. Último control de laboratorio dentro de parámetros normales.',
   
-  // Página 7 - Examen Físico - Estado Actual
+  // Página 9 - Examen Físico - Estado Actual
   constitucion: 'Normosómica',
   fascie: 'No patológica',
-  imc_examen: 24.2,
-  peso_examen: 65,
   altura_examen: 165,
+  peso_examen: 65,
+  imc_examen: 23.9,
   sc: '1.70',
   comentario_examen: 'Peso estable. IMC dentro de rango normal. Paciente en buen estado general.',
   
   // TSC
   edema: false,
-  dist_adiposa: 'Acorde al sexo y edad',
+  dist_adiposa: true,
+  dist_adiposa_detalle: 'Acorde al sexo y edad, distribución ginecoide',
   adenopatias: false,
+  mamas: false,
   raza: 'Caucásica',
   etnia: 'Hispana',
   
   // Piel y Faneras
-  piel_faneras: 'Piel hidratada, sin lesiones. Faneras conservadas.',
+  piel_faneras: 'Piel hidratada, sin lesiones. Faneras conservadas. Mucosas húmedas y rosadas.',
   
   // Cabeza
-  ojos: 'Conjuntivas rosadas',
-  vision: 'Leve presbicia corregida con anteojos',
-  reflejos: 'Conservados',
-  boca: 'Dentadura completa, buen estado',
-  nariz: 'Sin alteraciones',
-  oidos: 'Normales, sin tapones',
+  ojos: 'Conjuntivas rosadas, escleras blancas',
+  reflejos: 'Fotomotor y consensual conservados',
   
-  // Página 8 - Cuello y Tórax
-  inspeccion_cuello: 'Cuello simétrico, móvil. No se observan masas ni adenopatías.',
+  // Página 10 - Cuello y Tórax
+  inspeccion_cuello: 'Simétrico, móvil, sin masas',
   lat_arteriales: 'Presentes, simétricas',
   lat_venosas: 'No ingurgitadas',
   tiroides: 'No palpable, no bocio',
@@ -159,15 +167,15 @@ const version1Data: FormData = {
   // Tórax Respiratorio
   f_resp: 16,
   rmp: 'Murmullo vesicular conservado',
-  tipo_resp: 'T',
+  tipo_resp: 'Torácico',
+  auscultacion: 'Murmullo vesicular presente bilateral, sin ruidos agregados',
   comentarios_respiratorio: 'Buena entrada de aire bilateral. No sibilancias. No roncus. Expansibilidad conservada.',
   
   // Tórax Cardiovascular
   inspeccion_cardiovascular: 'Tórax simétrico. No abombamientos. Choque de punta en 5to EIC LMC.',
-  zmi: '5to EIC línea medioclavicular',
   fremitos: 'No',
   frote: 'No',
-  ta_cardiovascular: '128/82',
+  ta_cardiovascular: '128/82 mmHg',
   ausc_1r: true,
   ausc_plus: true,
   ausc_2r: true,
@@ -175,10 +183,7 @@ const version1Data: FormData = {
   ausc_4r: false,
   ausc_clic: false,
   soplos: false,
-  comentarios_cardiovascular: 'Ritmo regular. Ruidos cardíacos normofonéticos. No soplos. FC: 72 lpm.',
-  brazo: 'Derecho',
-  tabd: '128/82',
-  tabd1: '126/80',
+  brazo: false,
   
   // Página 9 - Vascular Periférico
   pulso_radial_der: 'Normal',
@@ -198,16 +203,16 @@ const version1Data: FormData = {
   fc2: '74 lpm',
   comentarios_fc: 'FC en reposo dentro de rango normal',
   
-  // Abdomen y Urogenital
+  // Página 11 - Abdomen y Urogenital
   abdomen: 'Blando, depresible, no doloroso. Ruidos hidroaéreos presentes. No visceromegalias. No masas palpables.',
   urogenital: 'Sin alteraciones. No referidas patologías genitourinarias.',
   
-  // Página 10 - SOMA y Neurológico
+  // Página 12 - SOMA y Neurológico
   soma: 'Tono muscular conservado. Fuerza muscular 5/5 en cuatro miembros. Marcha sin alteraciones. Sensibilidad conservada.',
   neurologico: 'Paciente consciente, orientada en tiempo, espacio y persona. Lenguaje fluido. Pares craneales conservados. ROT presentes y simétricos.',
   comentarios_soma: 'Estado neurológico dentro de parámetros normales. No déficits motores ni sensitivos.',
   
-  // Página 11 - Evolución
+  // Página 13 - Evolución
   evolucion: 'Paciente de 45 años con antecedente de HTA y dislipemia en tratamiento. Evolución favorable con buen control de cifras tensionales. Adherente al tratamiento farmacológico. Realiza actividad física regular. Última evaluación de laboratorio con perfil lipídico dentro de objetivos terapéuticos. Se indica continuar con tratamiento actual y control en 6 meses. Se refuerza importancia de hábitos saludables y actividad física.',
 };
 
@@ -220,16 +225,19 @@ const version2Data: FormData = {
   apellidos_nombres: 'Fernández Martínez, Carlos Alberto',
   sexo: 'M',
   domicilio: 'Calle San Martín 845, Morón',
+  localidad: 'Morón',
   dni: 16234567,
+  os_mpp: 'PAMI',
   fecha_nacimiento: '1961-07-22',
   edad: 62,
+  medico_cabecera: 'Dra. Laura González',
   tel1: '1134567890',
-  contacto: 'Ana Fernández (Hija)',
   tel2: '1145678901',
+  contacto: 'Ana Fernández (Hija)',
+  contacto_tel: '1156789012',
   profesion_tarea: 'Jubilado',
-  profesion_anterior: 'Chofer de colectivo',
   
-  // Accesibilidad
+  // Accesibilidad (sin cambios en esta sección)
   movilizacion: 'Con dificultad',
   movilidad_propia: false,
   con_transporte: 'Publico',
@@ -238,7 +246,14 @@ const version2Data: FormData = {
   tipo_calle: 'Calle de tierra',
   transporte_casa: false,
   
-  // Página 2 - Antecedentes Patológicos I
+  // Página 2 - Primer Contacto
+  primer_contacto: 'Paciente de 62 años acude a control trimestral por múltiples comorbilidades. Refiere empeoramiento de claudicación intermitente en últimas semanas. Dificultad para adherencia a dieta. TA mal controlada en domicilio según registro. Solicita renovación de recetas. Acompañado por hija quien refiere preocupación por estado general del paciente.',
+  
+  // Página 3 - Motivo de Consulta y Enfermedad Actual
+  motivo_consulta: 'Control de múltiples patologías crónicas: HTA, DBT2, enfermedad coronaria, EPOC. Empeoramiento de claudicación intermitente.',
+  enfermedad_actual: 'Paciente de 62 años con múltiples comorbilidades. HTA diagnosticada hace 17 años, mal controlada actualmente. Diabetes tipo 2 desde hace 12 años, último control con HbA1c 8.2%. IAM con angioplastia hace 5 años, actualmente estable. EPOC moderado con crisis ocasionales. Refiere claudicación intermitente a menor distancia (200m), frialdad en pies, edema en miembros inferiores bilateral. Dificultades para adherencia a tratamiento y dieta. Control subóptimo de cifras tensionales en domicilio (150/95 promedio última semana).',
+  
+  // Página 4 - Antecedentes Patológicos I
   acv: false,
   aneur_aort_reparado: false,
   alergia: false,
@@ -338,8 +353,11 @@ const version2Data: FormData = {
   // TSC
   edema: true,
   edema_detalle: 'Edema en miembros inferiores bilateral, leve, con fóvea',
-  dist_adiposa: 'Distribución central, abdomen prominente',
+  dist_adiposa: true,
+  dist_adiposa_detalle: 'Distribución central, abdomen prominente',
   adenopatias: false,
+  mamas: true,
+  mamas_detalle: 'Ginecomastia grado I',
   raza: 'Caucásica',
   etnia: 'Hispana',
   
@@ -348,11 +366,7 @@ const version2Data: FormData = {
   
   // Cabeza
   ojos: 'Xantelasmas. Arcus senilis',
-  vision: 'Disminuida, operado de cataratas OD, pendiente OI',
   reflejos: 'Fotomotor lento bilateral',
-  boca: 'Prótesis dental superior. Gingivitis',
-  nariz: 'Mucosa congestiva',
-  oidos: 'Hipoacusia bilateral',
   
   // Página 8 - Cuello y Tórax
   inspeccion_cuello: 'Cuello corto. Circunferencia aumentada. No masas palpables.',
@@ -365,15 +379,15 @@ const version2Data: FormData = {
   // Tórax Respiratorio
   f_resp: 20,
   rmp: 'Disminuido en bases',
-  tipo_resp: 'T',
+  tipo_resp: 'Torácico',
+  auscultacion: 'Murmullo vesicular disminuido bilateral con sibilancias espiratorias difusas',
   comentarios_respiratorio: 'Murmullo vesicular disminuido bilateral. Sibilancias espiratorias difusas. Espiración prolongada. Compatible con EPOC.',
   
   // Tórax Cardiovascular
   inspeccion_cardiovascular: 'Tórax en tonel. Choque de punta no palpable.',
-  zmi: 'No delimitable',
   fremitos: 'No',
   frote: 'No',
-  ta_cardiovascular: '148/92',
+  ta_cardiovascular: '148/92 mmHg',
   ausc_1r: true,
   ausc_plus: true,
   ausc_2r: true,
@@ -382,10 +396,7 @@ const version2Data: FormData = {
   ausc_clic: false,
   soplos: true,
   soplos_detalle: 'Soplo sistólico 2/6 en foco mitral',
-  comentarios_cardiovascular: 'Ritmo irregular. Extrasístoles ocasionales. Ruidos cardíacos apagados. Soplo sistólico leve.',
-  brazo: 'Derecho',
-  tabd: '148/92',
-  tabd1: '146/90',
+  brazo: true,
   
   // Página 9 - Vascular Periférico
   pulso_radial_der: 'Normal',
@@ -427,16 +438,19 @@ const version3Data: FormData = {
   apellidos_nombres: 'Rodríguez de Pérez, Rosa María',
   sexo: 'F',
   domicilio: 'Av. Libertador 2345, Vicente López',
+  localidad: 'Vicente López',
   dni: 4567890,
+  os_mpp: 'PAMI',
   fecha_nacimiento: '1945-11-08',
   edad: 78,
+  medico_cabecera: 'Dr. Martín Rodríguez',
   tel1: '1123456789',
-  contacto: 'Patricia Pérez (Hija)',
   tel2: '1134567890',
+  contacto: 'Patricia Pérez (Hija)',
+  contacto_tel: '1145678901',
   profesion_tarea: 'Jubilada',
-  profesion_anterior: 'Maestra',
   
-  // Accesibilidad
+  // Accesibilidad (sin cambios)
   movilizacion: 'Con dificultad',
   movilidad_propia: false,
   con_transporte: 'Privado',
@@ -445,7 +459,14 @@ const version3Data: FormData = {
   tipo_calle: 'Calle de asfalto',
   transporte_casa: true,
   
-  // Página 2 - Antecedentes Patológicos I
+  // Página 2 - Primer Contacto
+  primer_contacto: 'Paciente de 78 años, frágil, acude acompañada por hija a control mensual. Refiere deterioro funcional progresivo. Múltiples caídas en último mes. Edema en miembros inferiores que ha empeorado. Disnea de esfuerzo CF II. Desorientación ocasional referida por familia. Dificultad para manejo de polifarmacia. Hija solicita interconsulta con geriatría y evaluación de cuidados domiciliarios.',
+  
+  // Página 3 - Motivo de Consulta y Enfermedad Actual
+  motivo_consulta: 'Control mensual. Deterioro funcional. Múltiples caídas. Empeoramiento de edemas.',
+  enfermedad_actual: 'Paciente de 78 años con múltiples patologías crónicas: HTA, DBT2, cardiopatía isquémica con IAM previo y angioplastia, IC CF II, FA permanente, valvulopatía mitral moderada, ACV previo con mínima secuela, ERC estadio 3a, hipotiroidismo, osteoporosis, deterioro cognitivo leve, anemia crónica. Post fractura de cadera hace 3 años con deterioro funcional severo posterior. Actualmente con dependencia para AVD básicas. Refiere empeoramiento de edemas en miembros inferiores bilateral, disnea de esfuerzo CF II estable, palpitaciones ocasionales por FA. Múltiples caídas (3 en último mes) sin fracturas. Confusión vespertina ocasional. Polifarmacia (15 medicamentos). Alto riesgo de caídas.',
+  
+  // Página 4 - Antecedentes Patológicos I
   acv: true,
   aneur_aort_reparado: false,
   alergia: true,
@@ -547,8 +568,10 @@ const version3Data: FormData = {
   // TSC
   edema: true,
   edema_detalle: 'Edema en MMII bilateral hasta rodillas, con fóvea, no doloroso',
-  dist_adiposa: 'Disminuida, sarcopenia',
+  dist_adiposa: true,
+  dist_adiposa_detalle: 'Disminuida, sarcopenia',
   adenopatias: false,
+  mamas: false,
   raza: 'Caucásica',
   etnia: 'Europea',
   
@@ -557,11 +580,7 @@ const version3Data: FormData = {
   
   // Cabeza
   ojos: 'Conjuntivas pálidas. Operada de cataratas bilateral',
-  vision: 'Disminuida pese a cirugía',
   reflejos: 'Fotomotor lento',
-  boca: 'Prótesis dental mal adaptada. Mucosa seca',
-  nariz: 'Sin alteraciones',
-  oidos: 'Hipoacusia severa bilateral, usa audífonos',
   
   // Página 8 - Cuello y Tórax
   inspeccion_cuello: 'Cuello delgado. Latido carotídeo visible. Soplo carotídeo derecho.',
@@ -574,15 +593,15 @@ const version3Data: FormData = {
   // Tórax Respiratorio
   f_resp: 22,
   rmp: 'Murmullo vesicular disminuido',
-  tipo_resp: 'T',
+  tipo_resp: 'Torácico',
+  auscultacion: 'Hipoventilación basal bilateral con crepitantes finos en bases',
   comentarios_respiratorio: 'Hipoventilación basal bilateral. Crepitantes finos en bases. Expansibilidad limitada.',
   
   // Tórax Cardiovascular
   inspeccion_cardiovascular: 'Tórax asténico. Choque de punta desplazado.',
-  zmi: '6to EIC línea axilar anterior',
   fremitos: 'No',
   frote: 'No',
-  ta_cardiovascular: '102/68',
+  ta_cardiovascular: '102/68 mmHg',
   ausc_1r: true,
   ausc_plus: false,
   ausc_2r: true,
@@ -591,10 +610,7 @@ const version3Data: FormData = {
   ausc_clic: false,
   soplos: true,
   soplos_detalle: 'Soplo sistólico 3/6 en foco mitral, irradiado a axila',
-  comentarios_cardiovascular: 'Ritmo irregular. Arritmia completa por FA. Ruido cardíaco III. Soplo de insuficiencia mitral. FC variable 75-95 lpm.',
-  brazo: 'Derecho',
-  tabd: '102/68',
-  tabd1: '98/66',
+  brazo: true,
   
   // Página 9 - Vascular Periférico
   pulso_radial_der: 'Normal',
@@ -658,6 +674,9 @@ export const versionDescriptions = {
   version3: 'Paciente con seguimiento complejo - Fragilidad y polifarmacia',
   empty: 'Formulario vacío',
 };
+
+
+
 
 
 

@@ -104,6 +104,33 @@ export const MultiPageForm: React.FC<MultiPageFormProps> = ({
   const [showPreview, setShowPreview] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
+  // Calcular IMC automáticamente cuando cambien peso o altura
+  useEffect(() => {
+    const peso = formState.data['peso_examen'];
+    const altura = formState.data['altura_examen'];
+    const imcActual = formState.data['imc_examen'];
+    
+    if (peso && altura && !isNaN(peso) && !isNaN(altura)) {
+      // Convertir altura de cm a metros
+      const alturaMetros = Number(altura) / 100;
+      // Calcular IMC: peso (kg) / altura (m)^2
+      const imc = Number(peso) / (alturaMetros * alturaMetros);
+      // Redondear a 1 decimal
+      const imcRedondeado = Math.round(imc * 10) / 10;
+      
+      // Solo actualizar si el IMC cambió
+      if (imcActual !== imcRedondeado) {
+        setFormState(prev => ({
+          ...prev,
+          data: {
+            ...prev.data,
+            imc_examen: imcRedondeado
+          }
+        }));
+      }
+    }
+  }, [formState.data]);
+
   // Cargar datos desde localStorage al inicializar (solo una vez)
   useEffect(() => {
     const savedData = localStorage.getItem(`form_${config.id}_data`);

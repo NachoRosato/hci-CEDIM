@@ -17,6 +17,7 @@ export interface FormField {
     message?: string;
   };
   value?: any;
+  rows?: number; // Para textarea - número de filas visibles
 }
 
 export interface FormPackage {

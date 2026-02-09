@@ -12,6 +12,7 @@ import { Toast } from '@/components/ui/Toast';
 import LoginIcon from '@/components/icons/LoginIcon';
 
 const alfanumerico = /^[A-Za-z0-9]+$/;
+const clavePermitida = /^[A-Za-z0-9!@#$%^&*._-]+$/;
 const loginSchema = z.object({
   usuario: z
     .string({ required_error: 'El usuario es obligatorio' })
@@ -21,8 +22,8 @@ const loginSchema = z.object({
   clave: z
     .string({ required_error: 'La clave es obligatoria' })
     .min(3, { message: 'La clave debe tener al menos 3 caracteres' })
-    .max(10, { message: 'La clave no puede superar 10 caracteres' })
-    .regex(alfanumerico, { message: 'Solo letras y números' }),
+    .max(20, { message: 'La clave no puede superar 20 caracteres' })
+    .regex(clavePermitida, { message: 'Solo letras, números y caracteres especiales' }),
 });
 type LoginInput = z.infer<typeof loginSchema>;
 
@@ -99,9 +100,23 @@ function LoginInner() {
     e.preventDefault();
   };
 
+  const allowKeyClave = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const key = e.key;
+    if (clavePermitida.test(key)) return;
+    if ([
+      'Backspace', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'Delete'
+    ].includes(key)) return;
+    e.preventDefault();
+  };
+
   const sanitizePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     const data = e.clipboardData.getData('text');
     if (!/^[A-Za-z0-9]*$/.test(data)) e.preventDefault();
+  };
+
+  const sanitizePasteClave = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const data = e.clipboardData.getData('text');
+    if (!/^[A-Za-z0-9!@#$%^&*._-]*$/.test(data)) e.preventDefault();
   };
 
   useEffect(() => {
@@ -163,7 +178,7 @@ function LoginInner() {
 
             <Label className="rb14b c-latex30">Clave</Label>
             <PasswordField>
-              <Input aria-invalid={!!errors.clave} maxLength={10} onKeyDown={allowKey} onPaste={sanitizePaste} type={showPassword ? 'text' : 'password'} {...register('clave')} placeholder="Clave" autoComplete="current-password" className={errors.clave ? 'border-red-500 focus:ring-red-500' : ''} />
+              <Input aria-invalid={!!errors.clave} maxLength={20} onKeyDown={allowKeyClave} onPaste={sanitizePasteClave} type={showPassword ? 'text' : 'password'} {...register('clave')} placeholder="Clave" autoComplete="current-password" className={errors.clave ? 'border-red-500 focus:ring-red-500' : ''} />
               <ToggleBtn aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} onClick={() => setShowPassword(v => !v)}>
                 {showPassword ? (
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C7 20 2.73 16.11 1 12c.46-1.07 1.12-2.09 1.94-3M10.58 10.58a2 2 0 0 0 2.83 2.83"/><path d="M1 1l22 22"/><path d="M9.88 9.88a3 3 0 0 1 4.24 4.24"/><path d="M21.06 21.06A10.94 10.94 0 0 0 23 12c-.46-1.07-1.12-2.09-1.94-3A10.94 10.94 0 0 0 12 4c-1.07 0-2.09.17-3 .5"/></svg>

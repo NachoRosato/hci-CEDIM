@@ -1,5 +1,5 @@
 {
-  "BACKEND_URL": "http://localhost:3001",
+  "BACKEND_URL": "/api",
   "features": {
     "auth": true,
     "auditoria": false,
@@ -7,7 +7,7 @@
     "laboratorio": true,
     "search": true
   },
-  "authOptional": true,
+  "authOptional": false,
   "mockUser": "J. Pérez"
 }
 

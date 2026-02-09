@@ -61,6 +61,14 @@ const Input = styled.input`
     cursor: not-allowed;
   }
   
+  &[readonly] {
+    background-color: #f0f8ff;
+    color: var(--color-latex30);
+    border-color: var(--color-latex30);
+    font-weight: 600;
+    cursor: default;
+  }
+  
   &.error {
     border-color: #FB5555;
     background-color: rgba(251, 85, 85, 0.02);
@@ -72,7 +80,7 @@ const TextAreaWrapper = styled.div`
   width: 100%;
 `;
 
-const TextArea = styled.textarea`
+const TextArea = styled.textarea<{ $rows?: number }>`
   padding: 12px 16px;
   padding-top: 16px;
   border: 2px solid var(--color-grey90);
@@ -81,7 +89,7 @@ const TextArea = styled.textarea`
   font-size: 14px;
   background-color: var(--color-white);
   resize: vertical;
-  min-height: 120px;
+  min-height: ${props => props.$rows ? `${props.$rows * 24}px` : '120px'};
   width: 100%;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
@@ -265,6 +273,24 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
     let newValue: string | number | boolean = e.target.value;
     
     if (field.type === 'number') {
+      // Validación especial para peso_examen: solo 1 decimal
+      if (field.id === 'peso_examen') {
+        const value = e.target.value;
+        // Permitir números con máximo 1 decimal
+        if (value && !/^\d*\.?\d{0,1}$/.test(value)) {
+          return; // No actualizar si no cumple el formato
+        }
+      }
+      
+      // Validación especial para altura_examen: máximo 3 dígitos
+      if (field.id === 'altura_examen') {
+        const value = e.target.value;
+        // Permitir solo números enteros de máximo 3 dígitos
+        if (value && (!/^\d{0,3}$/.test(value) || Number(value) > 999)) {
+          return; // No actualizar si no cumple el formato
+        }
+      }
+      
       newValue = e.target.value ? Number(e.target.value) : '';
     } else if (field.type === 'checkbox') {
       newValue = (e.target as HTMLInputElement).checked;
@@ -274,21 +300,25 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
   };
 
   const renderInput = () => {
+    // El IMC es de solo lectura porque se calcula automáticamente
+    const isReadOnly = field.id === 'imc_examen';
+    
     const commonProps = {
       id: field.id,
       value: value || '',
       onChange: handleChange,
-      disabled,
+      disabled: disabled || isReadOnly,
       className: error ? 'error' : '',
       placeholder: field.placeholder,
-      required: field.required
+      required: field.required,
+      readOnly: isReadOnly
     };
 
     switch (field.type) {
       case 'textarea':
         return (
           <TextAreaWrapper>
-            <TextArea {...commonProps} />
+            <TextArea {...commonProps} $rows={field.rows} />
             <FloatingButton
               type="button"
               onClick={(e) => {
@@ -349,10 +379,17 @@ export const FormFieldComponent: React.FC<FormFieldProps> = ({
         );
       
       default:
+        // Agregar step para peso (permite decimales)
+        const extraProps: any = {};
+        if (field.id === 'peso_examen') {
+          extraProps.step = '0.1';
+        }
+        
         return (
           <Input
             type={field.type}
             {...commonProps}
+            {...extraProps}
           />
         );
     }

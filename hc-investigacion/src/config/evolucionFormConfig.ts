@@ -44,11 +44,25 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Ej: Brasil 780, Villa Sarmiento'
             },
             {
+              id: 'localidad',
+              label: 'Localidad',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: Villa Sarmiento'
+            },
+            {
               id: 'dni',
               label: 'DNI',
               type: 'number',
               required: true,
               placeholder: 'Ej: 40559615'
+            },
+            {
+              id: 'os_mpp',
+              label: 'O.S/MPP',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: OSDE, IOMA, etc.'
             },
             {
               id: 'fecha_nacimiento',
@@ -68,18 +82,18 @@ export const evolucionFormConfig: FormConfig = {
               }
             },
             {
+              id: 'medico_cabecera',
+              label: 'Médico de Cabecera',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: Dr. Juan Pérez'
+            },
+            {
               id: 'tel1',
               label: 'Tel.1',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: 115569605'
-            },
-            {
-              id: 'contacto',
-              label: 'Contacto',
-              type: 'text',
-              required: false,
-              placeholder: 'Ej: John Doe'
             },
             {
               id: 'tel2',
@@ -89,15 +103,22 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Ej: 115569605'
             },
             {
-              id: 'profesion_tarea',
-              label: 'Profesión/Tarea Actual',
+              id: 'contacto',
+              label: 'Contacto',
               type: 'text',
-              required: false,
-              placeholder: 'Ej: Abogada, Profesor, Desempleado, Ama de casa, etc.'
+              required: true,
+              placeholder: 'Ej: John Doe'
             },
             {
-              id: 'profesion_anterior',
-              label: 'Anterior',
+              id: 'contacto_tel',
+              label: 'Contacto Tel.',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: 115569605'
+            },
+            {
+              id: 'profesion_tarea',
+              label: 'Profesión/Tarea Actual',
               type: 'text',
               required: false,
               placeholder: 'Ej: Abogada, Profesor, Desempleado, Ama de casa, etc.'
@@ -162,13 +183,67 @@ export const evolucionFormConfig: FormConfig = {
     },
     {
       id: 'page_2',
+      title: 'Primer Contacto',
+      packages: [
+        {
+          id: 'primer_contacto',
+          title: 'Primer Contacto',
+          description: 'Registre la información del primer contacto con el paciente',
+          page: 2,
+          order: 1,
+          fields: [
+            {
+              id: 'primer_contacto',
+              label: 'Primer Contacto',
+              type: 'textarea',
+              required: false,
+              placeholder: 'Registre aquí toda la información relevante del primer contacto con el paciente...',
+              rows: 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'page_3',
+      title: 'Motivo de Consulta y Enfermedad Actual',
+      packages: [
+        {
+          id: 'motivo_enfermedad',
+          title: 'Motivo de Consulta y Enfermedad Actual',
+          description: 'Registre el motivo de consulta y la enfermedad actual del paciente',
+          page: 3,
+          order: 1,
+          fields: [
+            {
+              id: 'motivo_consulta',
+              label: 'Motivo de Consulta',
+              type: 'textarea',
+              required: true,
+              placeholder: 'Describa el motivo principal de la consulta...',
+              rows: 20
+            },
+            {
+              id: 'enfermedad_actual',
+              label: 'Enfermedad Actual',
+              type: 'textarea',
+              required: true,
+              placeholder: 'Describa la enfermedad actual del paciente...',
+              rows: 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'page_4',
       title: 'Antecedentes Patológicos Confirmados',
       packages: [
         {
           id: 'antecedentes_columna_izquierda',
           title: 'Antecedentes Patológicos - Parte I',
           description: 'Marque los antecedentes patológicos confirmados',
-          page: 2,
+          page: 4,
           order: 1,
           fields: [
             {
@@ -306,7 +381,7 @@ export const evolucionFormConfig: FormConfig = {
           id: 'antecedentes_columna_derecha',
           title: 'Antecedentes Patológicos - Parte II',
           description: 'Continúe marcando los antecedentes patológicos confirmados',
-          page: 2,
+          page: 4,
           order: 2,
           fields: [
             {
@@ -476,14 +551,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_3',
+      id: 'page_5',
       title: 'Antecedentes Patológicos Confirmados (Continuación)',
       packages: [
         {
           id: 'antecedentes_continuacion_izquierda',
           title: 'Antecedentes Patológicos - Parte III',
           description: 'Continúe marcando los antecedentes patológicos confirmados',
-          page: 3,
+          page: 5,
           order: 1,
           fields: [
             {
@@ -569,7 +644,7 @@ export const evolucionFormConfig: FormConfig = {
           id: 'antecedentes_continuacion_derecha',
           title: 'Antecedentes Patológicos - Parte IV',
           description: 'Continúe marcando los antecedentes patológicos confirmados',
-          page: 3,
+          page: 5,
           order: 2,
           fields: [
             {
@@ -655,14 +730,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_4',
+      id: 'page_6',
       title: 'Antecedentes Adicionales - Parte I',
       packages: [
         {
           id: 'antecedentes_adicionales_parte1',
           title: 'Otros Antecedentes y Desarrollo',
           description: 'Registre observaciones generales y antecedentes de infancia y adultez',
-          page: 4,
+          page: 6,
           order: 1,
           fields: [
             {
@@ -691,14 +766,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_5',
+      id: 'page_7',
       title: 'Antecedentes Adicionales - Parte II',
       packages: [
         {
           id: 'antecedentes_adicionales_parte2',
           title: 'Intervenciones y Medicación',
           description: 'Registre operaciones, traumas y medicación actual del paciente',
-          page: 5,
+          page: 7,
           order: 1,
           fields: [
             {
@@ -727,14 +802,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_6',
+      id: 'page_8',
       title: 'Antecedentes Familiares y Socio-económicos',
       packages: [
         {
           id: 'antecedentes_adicionales',
           title: 'Información Complementaria del Paciente',
           description: 'Registre antecedentes familiares, socio-económicos y comentarios adicionales',
-          page: 6,
+          page: 8,
           order: 1,
           fields: [
             {
@@ -770,14 +845,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_7',
+      id: 'page_9',
       title: 'Examen Físico - Estado Actual',
       packages: [
         {
           id: 'examen_general',
           title: 'Exámen General',
           description: 'Evaluación general del estado físico del paciente',
-          page: 7,
+          page: 9,
           order: 1,
           fields: [
             {
@@ -795,25 +870,29 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: ''
             },
             {
-              id: 'imc_examen',
-              label: 'IMC',
+              id: 'altura_examen',
+              label: 'Altura (cm)',
               type: 'number',
               required: true,
-              placeholder: 'Ej: 25.1'
+              placeholder: 'Ej: 187',
+              validation: {
+                min: 50,
+                max: 999
+              }
             },
             {
               id: 'peso_examen',
-              label: 'Peso',
+              label: 'Peso (kg)',
               type: 'number',
               required: true,
-              placeholder: 'Ej: 74 kg'
+              placeholder: 'Ej: 74.5'
             },
             {
-              id: 'altura_examen',
-              label: 'Altura',
+              id: 'imc_examen',
+              label: 'IMC (calculado)',
               type: 'number',
               required: true,
-              placeholder: 'Ej: 187 cm'
+              placeholder: 'Se calcula automáticamente'
             },
             {
               id: 'sc',
@@ -835,14 +914,14 @@ export const evolucionFormConfig: FormConfig = {
           id: 'tsc_evaluacion',
           title: 'TSC',
           description: 'Evaluación de características físicas y distribución',
-          page: 7,
+          page: 9,
           order: 2,
           fields: [
             {
               id: 'edema',
               label: 'Edema',
               type: 'checkbox',
-              required: false
+              required: true
             },
             {
               id: 'edema_detalle',
@@ -854,9 +933,15 @@ export const evolucionFormConfig: FormConfig = {
             {
               id: 'dist_adiposa',
               label: 'Dist. Adiposa',
+              type: 'checkbox',
+              required: true
+            },
+            {
+              id: 'dist_adiposa_detalle',
+              label: 'Detalle de Dist. Adiposa',
               type: 'text',
-              required: true,
-              placeholder: 'Ej: Acorde al sexo y edad'
+              required: false,
+              placeholder: 'Especificar distribución adiposa'
             },
             {
               id: 'adenopatias',
@@ -872,17 +957,30 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Especificar localización y características'
             },
             {
+              id: 'mamas',
+              label: 'Mamas',
+              type: 'checkbox',
+              required: true
+            },
+            {
+              id: 'mamas_detalle',
+              label: 'Detalle de Mamas',
+              type: 'text',
+              required: false,
+              placeholder: 'Especificar hallazgos en mamas'
+            },
+            {
               id: 'raza',
               label: 'Raza',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: caucásico'
             },
             {
               id: 'etnia',
               label: 'Etnia',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: Mapuche'
             }
           ]
@@ -891,14 +989,14 @@ export const evolucionFormConfig: FormConfig = {
           id: 'piel_faneras',
           title: 'Piel y Faneras',
           description: 'Evaluación de piel, cabello y uñas',
-          page: 7,
+          page: 9,
           order: 3,
           fields: [
             {
               id: 'piel_faneras',
               label: 'Piel y Faneras',
               type: 'textarea',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             }
           ]
@@ -907,22 +1005,15 @@ export const evolucionFormConfig: FormConfig = {
           id: 'cabeza',
           title: 'Cabeza',
           description: 'Evaluación de órganos de la cabeza',
-          page: 7,
+          page: 9,
           order: 4,
           fields: [
             {
               id: 'ojos',
               label: 'Ojos',
               type: 'text',
-              required: true,
-              placeholder: 'Ej: Conjutivos'
-            },
-            {
-              id: 'vision',
-              label: 'Visión',
-              type: 'text',
               required: false,
-              placeholder: 'Ej: Presbicia'
+              placeholder: 'Ej: Conjutivos'
             },
             {
               id: 'reflejos',
@@ -930,47 +1021,26 @@ export const evolucionFormConfig: FormConfig = {
               type: 'text',
               required: false,
               placeholder: 'Ej: Conservados'
-            },
-            {
-              id: 'boca',
-              label: 'Boca',
-              type: 'text',
-              required: false,
-              placeholder: 'Ej: Fauces'
-            },
-            {
-              id: 'nariz',
-              label: 'Nariz',
-              type: 'text',
-              required: false,
-              placeholder: 'Ej: Senos Paranasales'
-            },
-            {
-              id: 'oidos',
-              label: 'Oídos',
-              type: 'text',
-              required: false,
-              placeholder: 'Ej: normales'
             }
           ]
         }
       ]
     },
     {
-      id: 'page_8',
+      id: 'page_10',
       title: 'Examen Físico - Cuello y Tórax',
       packages: [
         {
           id: 'cuello',
           title: 'Cuello',
           description: 'Evaluación del cuello y estructuras relacionadas',
-          page: 8,
+          page: 10,
           order: 1,
           fields: [
             {
               id: 'inspeccion_cuello',
               label: 'Inspección',
-              type: 'textarea',
+              type: 'text',
               required: true,
               placeholder: 'Ej:'
             },
@@ -978,7 +1048,7 @@ export const evolucionFormConfig: FormConfig = {
               id: 'lat_arteriales',
               label: 'Lat. Arteriales',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: Presentes'
             },
             {
@@ -992,21 +1062,21 @@ export const evolucionFormConfig: FormConfig = {
               id: 'tiroides',
               label: 'Tiroides',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: No palpable'
             },
             {
               id: 't_yugular',
               label: 'T. Yugular',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: No'
             },
             {
               id: 'auscultacion_vde_c',
               label: 'Auscultación Vde C',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: No hay soplos'
             }
           ]
@@ -1015,7 +1085,7 @@ export const evolucionFormConfig: FormConfig = {
           id: 'torax_aparato_respiratorio',
           title: 'Tórax Aparato Respiratorio',
           description: 'Evaluación del sistema respiratorio',
-          page: 8,
+          page: 10,
           order: 2,
           fields: [
             {
@@ -1029,21 +1099,28 @@ export const evolucionFormConfig: FormConfig = {
               id: 'rmp',
               label: 'RMP',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             },
             {
               id: 'tipo_resp',
               label: 'Tipo Resp.',
               type: 'radio',
-              required: false,
-              options: ['A', 'T']
+              required: true,
+              options: ['Abdominal', 'Torácico']
+            },
+            {
+              id: 'auscultacion',
+              label: 'Auscultación',
+              type: 'text',
+              required: true,
+              placeholder: 'Ej: Murmullo vesicular conservado'
             },
             {
               id: 'comentarios_respiratorio',
               label: 'Comentarios',
               type: 'textarea',
-              required: false,
+              required: true,
               placeholder: 'Ej: Buena emitida de aire, no hay soplos...'
             }
           ]
@@ -1052,21 +1129,14 @@ export const evolucionFormConfig: FormConfig = {
           id: 'torax_aparato_cardiovascular',
           title: 'Tórax Aparato Cardiovascular',
           description: 'Evaluación del sistema cardiovascular',
-          page: 8,
+          page: 10,
           order: 3,
           fields: [
             {
               id: 'inspeccion_cardiovascular',
               label: 'Inspección',
               type: 'textarea',
-              required: false,
-              placeholder: 'Ej:'
-            },
-            {
-              id: 'zmi',
-              label: 'ZMI',
-              type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             },
             {
@@ -1080,33 +1150,33 @@ export const evolucionFormConfig: FormConfig = {
               id: 'frote',
               label: 'Frote',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej: No'
             },
             {
               id: 'ta_cardiovascular',
               label: 'TA',
               type: 'text',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             },
             {
               id: 'ausc_1r',
               label: '1R',
               type: 'checkbox',
-              required: false
+              required: true
             },
             {
               id: 'ausc_plus',
               label: '+',
               type: 'checkbox',
-              required: false
+              required: true
             },
             {
               id: 'ausc_2r',
               label: '2R',
               type: 'checkbox',
-              required: false
+              required: true
             },
             {
               id: 'ausc_3r',
@@ -1140,46 +1210,24 @@ export const evolucionFormConfig: FormConfig = {
               placeholder: 'Especificar características'
             },
             {
-              id: 'comentarios_cardiovascular',
-              label: 'Comentarios',
-              type: 'textarea',
-              required: false,
-              placeholder: 'Ej: Se procede a determinar el brazo dominante en un ambiente relajado, con la vejiga vacía...'
-            },
-            {
               id: 'brazo',
               label: 'Brazo',
-              type: 'radio',
-              required: true,
-              options: ['Izquierdo', 'Derecho']
-            },
-            {
-              id: 'tabd',
-              label: 'TABD',
-              type: 'text',
-              required: false,
-              placeholder: 'Ej:149/89'
-            },
-            {
-              id: 'tabd1',
-              label: 'TABD1',
-              type: 'text',
-              required: false,
-              placeholder: 'Ej:146/90'
+              type: 'checkbox',
+              required: false
             }
           ]
         }
       ]
     },
     {
-      id: 'page_9',
+      id: 'page_11',
       title: 'Examen Físico - Vascular Periférico y Abdomen',
       packages: [
         {
           id: 'vascular_periferico',
           title: 'Vasc. Periférico',
           description: 'Evaluación del sistema vascular periférico',
-          page: 9,
+          page: 11,
           order: 1,
           fields: [
             {
@@ -1300,14 +1348,14 @@ export const evolucionFormConfig: FormConfig = {
           id: 'abdomen',
           title: 'Abdomen',
           description: 'Evaluación abdominal',
-          page: 9,
+          page: 11,
           order: 2,
           fields: [
             {
               id: 'abdomen',
               label: 'Abdomen',
               type: 'textarea',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             }
           ]
@@ -1316,14 +1364,14 @@ export const evolucionFormConfig: FormConfig = {
           id: 'urogenital',
           title: 'Urogenital',
           description: 'Evaluación del sistema urogenital',
-          page: 9,
+          page: 11,
           order: 3,
           fields: [
             {
               id: 'urogenital',
               label: 'Urogenital',
               type: 'textarea',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             }
           ]
@@ -1331,14 +1379,14 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_10',
+      id: 'page_12',
       title: 'SOMA - Neurologico',
       packages: [
         {
           id: 'soma_neurologico',
           title: 'Evaluación Somática y Neurológica',
           description: 'Evaluación del sistema somático y neurológico',
-          page: 10,
+          page: 12,
           order: 1,
           fields: [
             {
@@ -1352,7 +1400,7 @@ export const evolucionFormConfig: FormConfig = {
               id: 'neurologico',
               label: 'Neurológico',
               type: 'textarea',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             },
             {
@@ -1367,21 +1415,21 @@ export const evolucionFormConfig: FormConfig = {
       ]
     },
     {
-      id: 'page_11',
+      id: 'page_13',
       title: 'Evolución',
       packages: [
         {
           id: 'evolucion',
           title: 'Evolución del Paciente',
           description: 'Registro de la evolución general del paciente',
-          page: 11,
+          page: 13,
           order: 1,
           fields: [
             {
               id: 'evolucion',
               label: 'Evolución',
               type: 'textarea',
-              required: false,
+              required: true,
               placeholder: 'Ej:'
             }
           ]
